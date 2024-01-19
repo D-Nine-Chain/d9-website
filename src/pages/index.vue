@@ -2,6 +2,8 @@
 defineOptions({
   name: 'IndexPage',
 })
+isDark.value = false
+preferredDark.value = false
 </script>
 
 <template>
