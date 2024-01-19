@@ -8,9 +8,9 @@ defineOptions({
   <div w-limited>
     <HomeSectionHeader min-h-50vh />
 
-    <HomeSectionCommunity mt-6 min-h-50vh />
+    <HomeSectionCommunity mt-20 min-h-50vh />
 
-    <HomeSectionHighlight mt-6 min-h-50vh />
+    <HomeSectionHighlight mt-20 min-h-50vh />
   </div>
 </template>
 
