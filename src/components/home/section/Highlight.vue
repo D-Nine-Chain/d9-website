@@ -10,7 +10,7 @@
 
     <div class="divider" mx-auto mt-6 h-1 w-16 />
 
-    <div class="items" grid grid-cols-1 mx-auto mt-12 gap-30 lg:grid-cols-3 lt-lg:mt-28 lt-lg:max-w-120 lg:gap-8>
+    <div class="items" grid grid-cols-1 mx-auto mt-28 gap-30 lg:grid-cols-3 lt-lg:max-w-120 lg:gap-8>
       <div>
         <img class="translate-y--50%" h-9rem src="/imgs/home-highlights-1.png">
         <h3>
