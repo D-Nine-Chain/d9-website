@@ -12,7 +12,7 @@ const routes: { path: keyof RouteNamedMap, name: string }[] = [{
   name: 'Tokens',
 }]
 const { dark } = definePropsRefs<{
-  dark: boolean
+  dark?: boolean
 }>()
 </script>
 
