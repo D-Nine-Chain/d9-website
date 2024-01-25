@@ -1,17 +1,17 @@
-## 安装推荐的编辑器插件
+## Install recommended editor plugins
 
-进入 `扩展` 页面，搜索框输入 `@recommended`，安装所有
+Enter the `Extensions` page, enter `@recommended` in the search box, and install all
 
-## 禁用编辑器插件
+## Disable editor plugin
 
-务必禁用 `prettier` 插件(代码格式已由`eslint`进行规范)，确保安装了 `eslint` 插件并已启用
+Be sure to disable the `prettier` plugin (the code format is standardized by `eslint`) and make sure the `eslint` plugin is installed and enabled
 
-## 环境
+## environment
 
-- 确保node版本>=18
-- 安装 pnpm 包管理器
-  - 通过
+- Make sure node version >=18
+- Install pnpm package manager
+  - pass
     - `corepack enable`
     - `corepack prepare pnpm@latest --activate`
-  - 或是
+  - or
     - `npm i -g pnpm`
