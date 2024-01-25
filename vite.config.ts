@@ -100,6 +100,7 @@ export default defineConfig({
   },
 
   // https://github.com/antfu/vite-ssg
+  // ssg for main app
   ssgOptions: {
     script: 'async',
     formatting: 'minify',
@@ -108,6 +109,15 @@ export default defineConfig({
     },
     onFinished() {
       generateSitemap()
+    },
+  },
+
+  build: {
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, 'index.html'),
+        crosschain: path.resolve(__dirname, 'crosschain/index.html'),
+      },
     },
   },
 

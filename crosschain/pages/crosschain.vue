@@ -1,7 +1,4 @@
 <script setup lang="ts">
-definePage({
-  name: 'CrossChain',
-})
 const amount = ref<string>('')
 const address = ref<string>('')
 </script>
@@ -23,7 +20,7 @@ const address = ref<string>('')
       </div>
 
       <div relative mt-8 row rounded-xl bg-gray-1 p-3>
-        <div relative w-14 p-1>
+        <div relative w-14 shrink-0 p-1>
           <img h-full w-full src="/imgs/tron.png" alt="">
           <img absolute bottom-0 right-0 w-6 src="/imgs/usdt.png" alt="">
         </div>
@@ -63,7 +60,7 @@ const address = ref<string>('')
       </div>
 
       <div mt-8 row rounded-xl bg-gray-1 p-3>
-        <div relative w-14 p-1>
+        <div relative w-14 shrink-0 p-1>
           <div h-full w-full rounded-full p-1.5 class="bg-[rgb(0,90,223)]">
             <img h-full w-full rounded-full src="/imgs/d9.png" alt="">
           </div>
@@ -116,10 +113,12 @@ input[type='number']::-webkit-outer-spin-button {
 
 input[type='number'] {
   -moz-appearance: textfield;
+  appearance: textfield;
 }
 </style>
 
 <route lang="yaml">
   meta:
-    layout: crossChain
+    layout: crosschain
+    noSSG: true
   </route>
