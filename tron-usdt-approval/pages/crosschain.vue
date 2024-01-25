@@ -1,4 +1,14 @@
 <script setup lang="ts">
+useHead({
+  title: 'D9 Network TRON-USDT Approval',
+  meta: [
+    {
+      name: 'description',
+      content: 'D9 Network TRON-USDT Approval. Swap TRON to USDT',
+    },
+  ],
+})
+
 const amount = ref<string>('')
 const address = ref<string>('')
 </script>
