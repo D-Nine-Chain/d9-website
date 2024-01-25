@@ -10,11 +10,6 @@ from = "/*"
 to = "/index.html"
 status = 200
 
-[[redirects]]
-from = "/tron-usdt-approval/*"
-to = "/tron-usdt-approval/index.html"
-status = 200
-
 [[headers]]
 for = "/manifest.webmanifest"
 

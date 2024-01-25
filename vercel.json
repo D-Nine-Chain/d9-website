@@ -3,10 +3,6 @@
     {
       "source": "/(.*)",
       "destination": "/index.html"
-    },
-    {
-      "source": "/tron-usdt-approval/(.*)",
-      "destination": "/tron-usdt-approval/index.html"
     }
   ]
 }

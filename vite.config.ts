@@ -112,15 +112,6 @@ export default defineConfig({
     },
   },
 
-  build: {
-    rollupOptions: {
-      input: {
-        'main': path.resolve(__dirname, 'index.html'),
-        'tron-usdt-approval': path.resolve(__dirname, 'tron-usdt-approval/index.html'),
-      },
-    },
-  },
-
   ssr: {
     // TODO: workaround until they support native ESM
     noExternal: ['workbox-window', /vue-i18n/, 'primevue'],
