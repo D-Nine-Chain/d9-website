@@ -21,6 +21,8 @@ useHead({
   ],
 })
 
+// useWalletStore()
+
 const { y } = useWindowScroll()
 const navOffsetY = computed(() => {
   return `${y.value > 60 ? 60 : 0}px`
