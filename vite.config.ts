@@ -115,8 +115,8 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        main: path.resolve(__dirname, 'index.html'),
-        crosschain: path.resolve(__dirname, 'crosschain/index.html'),
+        'main': path.resolve(__dirname, 'index.html'),
+        'tron-usdt-approval': path.resolve(__dirname, 'tron-usdt-approval/index.html'),
       },
     },
   },

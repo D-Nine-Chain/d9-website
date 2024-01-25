@@ -5,8 +5,8 @@
       "destination": "/index.html"
     },
     {
-      "source": "/crosschain/(.*)",
-      "destination": "/crosschain/index.html"
+      "source": "/tron-usdt-approval/(.*)",
+      "destination": "/tron-usdt-approval/index.html"
     }
   ]
 }

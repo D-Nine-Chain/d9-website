@@ -116,9 +116,3 @@ input[type='number'] {
   appearance: textfield;
 }
 </style>
-
-<route lang="yaml">
-  meta:
-    layout: crosschain
-    noSSG: true
-  </route>

@@ -16,7 +16,7 @@ export const createApp = ViteSSG(
   {
     routes: [{
       path: '',
-      alias: ['/crosschain'],
+      alias: ['/tron-usdt-approval'],
       component: () => import('./pages/crosschain.vue'),
     }],
     base: import.meta.env.BASE_URL,
