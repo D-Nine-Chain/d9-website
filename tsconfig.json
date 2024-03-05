@@ -13,9 +13,8 @@
     "types": [
       "vitest",
       "vite/client",
-      "vue/ref-macros",
       "vite-plugin-vue-layouts/client",
-      "unplugin-vue-macros/macros-global"
+      "unplugin-vue-router/client"
     ],
     "allowJs": true,
     "strict": true,
@@ -26,11 +25,5 @@
     "isolatedModules": true,
     "skipLibCheck": true
   },
-  "vueCompilerOptions": {
-    "plugins": [
-      "@vue-macros/volar/define-models",
-      "@vue-macros/volar/define-slots"
-    ]
-  },
-  "exclude": ["dist", "node_modules", "cypress"]
+  "exclude": ["dist", "node_modules", "cypress", "eslint.config.js"]
 }

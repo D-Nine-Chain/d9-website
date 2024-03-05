@@ -5,11 +5,23 @@ body,
   height: 100%;
   margin: 0;
   padding: 0;
+  background: var(--background);
 }
 
-html.dark {
-  background: #121212;
-  color-scheme: dark;
+// html.dark {
+//   background: #121212;
+//   color-scheme: dark;
+// }
+
+@font-face {
+  font-family: 'ds-digi';
+  src: url('/fonts/dsdigi.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'ds-digii';
+  src: url('/fonts/dsdigii.woff2') format('woff2');
+  font-style: oblique;
 }
 
 #nprogress {
@@ -27,11 +39,24 @@ html.dark {
   }
 }
 
+.brand-gradient {
+  background: rgb(0, 94, 225);
+  background: var(--gradient);
+}
+
+.text-open24display {
+  font-family: 'open24display';
+}
+
 .text-gradient {
   display: inline;
   background: var(--gradient);
   background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.card-shadow {
+  box-shadow: var(--card-shadow);
 }
 
 button {
@@ -43,7 +68,6 @@ button {
 }
 
 button.primary {
-  padding: 0.25rem 1rem;
   background: var(--gradient);
   color: rgb(233, 233, 233);
   transition: all 0.4s ease-out;
@@ -60,9 +84,13 @@ button.primary {
 
   &.with-border {
     position: relative;
+
     &::after {
       content: attr(text);
       position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       inset: 2px;
       background: var(--home-background);
       clip-path: polygon(

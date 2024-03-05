@@ -15,12 +15,17 @@ export default defineConfig({
     ['row', 'flex flex-row'],
     ['w-limited', 'max-w-[var(--content-max-width)] px-[var(--content-x-padding)] mx-auto'],
     ['align-central', 'items-center justify-center'],
+    [/^wh-(.*)$/, ([, c]) => `width-${c} height-${c}`],
   ],
   theme: {
     colors: {
       'bg': 'var(--home-background)',
       'brand-gradient': 'var(--gradient)',
       'brand': 'var(--brand)',
+    },
+    fontFamily: {
+      'ds-digi': 'ds-digi',
+      'ds-digii': 'ds-digii',
     },
   },
   presets: [
@@ -35,7 +40,7 @@ export default defineConfig({
     }),
     presetTypography(),
     presetWebFonts({
-      provider: 'fontshare',
+      provider: 'bunny',
       fonts: {
         sans: 'Satoshi',
         serif: 'Stardom',

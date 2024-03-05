@@ -12,7 +12,7 @@ const products = [{
 </script>
 
 <template>
-  <DataTable :value="products" table-style="min-width: 50rem">
+  <DataTable :value="products" :table-style="{ 'min-width': '50rem' }">
     <Column field="name" header="Name" />
     <Column field="ranking" header="Ranking" />
     <Column field="votes" header="Real-Time Votes" />

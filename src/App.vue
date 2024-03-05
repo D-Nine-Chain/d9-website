@@ -36,7 +36,8 @@ const navOffsetY = computed(() => {
 </template>
 
 <style lang="scss">
-.router-root {
+html {
+  --background: rgb(249, 250, 252);
   --brand: rgb(0, 102, 255);
   --content-max-width: 1266px;
   --content-x-padding: 2rem;
@@ -45,15 +46,11 @@ const navOffsetY = computed(() => {
   --nav-translate-y: calc(v-bind('navOffsetY') * -1);
   --home-background: rgb(1, 21, 63);
   --gradient: linear-gradient(90deg, rgb(0, 90, 216) 0%, rgb(4, 165, 252) 100%);
+  --card-shadow: 0px 0px 20px -6px rgba(197, 204, 215, 1);
 
   @media (max-width: 960px) {
     --nav-height: 60px;
     --nav-translate-y: 0;
   }
-}
-
-.brand-gradient {
-  background: rgb(0, 94, 225);
-  background: var(--gradient);
 }
 </style>

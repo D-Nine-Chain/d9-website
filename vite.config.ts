@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 import path from 'node:path'
 import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
@@ -6,13 +7,15 @@ import Layouts from 'vite-plugin-vue-layouts'
 import Components from 'unplugin-vue-components/vite'
 import { PrimeVueResolver } from 'unplugin-vue-components/resolvers'
 import AutoImport from 'unplugin-auto-import/vite'
-import VueMacros from 'unplugin-vue-macros/vite'
 import VueI18n from '@intlify/unplugin-vue-i18n/vite'
 import VueDevTools from 'vite-plugin-vue-devtools'
 import Unocss from 'unocss/vite'
 import WebfontDownload from 'vite-plugin-webfont-dl'
 import VueRouter from 'unplugin-vue-router/vite'
 import { VueRouterAutoImports } from 'unplugin-vue-router'
+
+import type { InlineConfig } from 'vitest'
+import type { UserConfig } from 'vite'
 
 export default defineConfig({
   resolve: {
@@ -22,12 +25,8 @@ export default defineConfig({
   },
 
   plugins: [
-    VueMacros({
-      plugins: {
-        vue: Vue({
-          include: [/\.vue$/],
-        }),
-      },
+    Vue({
+      include: [/\.vue$/],
     }),
 
     // https://github.com/posva/unplugin-vue-router
@@ -116,4 +115,4 @@ export default defineConfig({
     // TODO: workaround until they support native ESM
     noExternal: ['workbox-window', /vue-i18n/, 'primevue'],
   },
-})
+} as UserConfig & { test: InlineConfig })

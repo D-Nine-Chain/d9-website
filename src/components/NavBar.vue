@@ -1,6 +1,9 @@
 <script setup lang="ts">
-import type { RouteNamedMap } from 'vue-router/auto/routes'
+import type { RouteNamedMap } from 'vue-router/auto-routes'
 
+const props = defineProps<{
+  dark?: boolean
+}>()
 const routes: { path: keyof RouteNamedMap, name: string }[] = [{
   path: '/',
   name: 'Home',
@@ -11,9 +14,7 @@ const routes: { path: keyof RouteNamedMap, name: string }[] = [{
   path: '/tokens',
   name: 'Tokens',
 }]
-const { dark } = definePropsRefs<{
-  dark?: boolean
-}>()
+const { dark } = toRefs(props)
 </script>
 
 <template>

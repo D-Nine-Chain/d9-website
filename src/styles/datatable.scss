@@ -7,6 +7,12 @@
     @apply shadow;
   }
 
+  .p-datatable-tbody {
+    tr {
+      background: transparent;
+    }
+  }
+
   .p-datatable-thead > tr > th {
     background: transparent;
     padding-top: #{$header-padding-y};
