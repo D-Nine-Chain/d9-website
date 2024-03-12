@@ -39,26 +39,6 @@ body,
   }
 }
 
-.brand-gradient {
-  background: rgb(0, 94, 225);
-  background: var(--gradient);
-}
-
-.text-open24display {
-  font-family: 'open24display';
-}
-
-.text-gradient {
-  display: inline;
-  background: var(--gradient);
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.card-shadow {
-  box-shadow: var(--card-shadow);
-}
-
 button {
   color: white;
   padding: 0.6rem 1.2rem;
@@ -130,6 +110,27 @@ button.primary {
     rgba(0, 197, 222, 1) 0%,
     rgba(0, 20, 87, 1) 100%
   );
+}
+
+dl.details {
+  & > div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 2.1875rem;
+    & > dt {
+      flex-shrink: 0;
+      min-width: 8rem;
+      display: inline-block;
+      margin-right: 1rem;
+    }
+    & > dd {
+      flex-grow: 1;
+      display: inline;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+  }
 }
 
 @import url(primevue/resources/themes/lara-light-blue/theme.css);

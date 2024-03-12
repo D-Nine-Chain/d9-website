@@ -17,6 +17,21 @@ export default defineConfig({
     ['align-central', 'items-center justify-center'],
     [/^wh-(.*)$/, ([, c]) => `width-${c} height-${c}`],
   ],
+  rules: [
+    [/^text-gradient$/, ([,]) => ({
+      'display': 'inline',
+      'background': 'var(--gradient)',
+      'background-clip': 'text',
+      '-webkit-text-fill-color': 'transparent',
+    })],
+    [/^brand-gradient$/, () => ({
+      'background-color': 'rgb(0, 94, 225)',
+      'background-image': 'var(--gradient)',
+    })],
+    [/^card-shadow$/, () => ({
+      'box-shadow': 'var(--card-shadow)',
+    })],
+  ],
   theme: {
     colors: {
       'bg': 'var(--home-background)',

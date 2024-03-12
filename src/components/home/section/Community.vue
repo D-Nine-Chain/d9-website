@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div>
+  <section>
     <h2 text-center text-4xl font-bold>
       {{ $t('page.home.community.t') }}
     </h2>
@@ -24,7 +24,7 @@
         </p>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <style scoped>

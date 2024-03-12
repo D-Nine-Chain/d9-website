@@ -24,7 +24,7 @@ const items = [{
   <CoverWrapper>
     <SearchInput />
 
-    <div class="block">
+    <section class="block">
       <h2 text-black font-900>
         Block
       </h2>
@@ -60,7 +60,7 @@ const items = [{
           </p>
         </router-link>
       </div>
-    </div>
+    </section>
   </CoverWrapper>
 </template>
 

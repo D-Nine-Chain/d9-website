@@ -6,7 +6,7 @@ import { format, formatDistance } from 'date-fns'
   <CoverWrapper>
     <SearchInput />
 
-    <div class="card-shadow block">
+    <section class="block card-shadow">
       <h2 text-2.25rem text-black font-900>
         <span class="text-gradient">
           Block #233666
@@ -17,7 +17,7 @@ import { format, formatDistance } from 'date-fns'
         </span>
       </h2>
 
-      <dl>
+      <dl class="details">
         <div>
           <dt>
             Block Hash:
@@ -68,7 +68,7 @@ import { format, formatDistance } from 'date-fns'
           </dd>
         </div>
       </dl>
-    </div>
+    </section>
   </CoverWrapper>
 </template>
 
@@ -89,18 +89,5 @@ import { format, formatDistance } from 'date-fns'
   font-size: 1.0625rem;
   color: white;
   margin-left: 1.9375rem;
-}
-
-dl {
-  div {
-    margin-top: 2.1875rem;
-    dt {
-      display: inline;
-      margin-right: 1rem;
-    }
-    dd {
-      display: inline;
-    }
-  }
 }
 </style>

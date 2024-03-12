@@ -5,14 +5,14 @@ const value = ref([{ label: '', value: 15, color: 'green', icon: '' }])
 </script>
 
 <template>
-  <div class="card-shadow" rounded-2xl p-8>
+  <section class="card-shadow" rounded-2xl p-8>
     <h2 text-black font-900>
       Votes
     </h2>
     <div ml-3.75rem mt-0.625rem mt-2.3125rem row items-center>
       <img w-6.25rem shrink-0 object-contain src="/imgs/blockchain-vote-left.png" alt="Blockchain Votes left icon">
 
-      <div ml-1.625rem grow>
+      <dl ml-1.625rem grow>
         <dt style="color: rgba(96, 199, 222, 1)">
           Real-time total votes this round
         </dt>
@@ -22,11 +22,11 @@ const value = ref([{ label: '', value: 15, color: 'green', icon: '' }])
           </span>
           <span vertical-mid text-1rem style="color: rgba(29, 188, 89, 1)">+161,783</span>
         </dd>
-      </div>
+      </dl>
 
-      <div shrink-0 text-center>
+      <dl shrink-0 text-center>
         <dt>
-          <span vertical-mid class="text-gradient">
+          <span vertical-mid text-gradient>
             Next Round
           </span>
 
@@ -36,9 +36,9 @@ const value = ref([{ label: '', value: 15, color: 'green', icon: '' }])
         </dt>
 
         <MeterGroup :value="value" />
-      </div>
+      </dl>
     </div>
-  </div>
+  </section>
 </template>
 
 <style scoped lang='scss'>

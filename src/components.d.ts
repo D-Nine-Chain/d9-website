@@ -7,9 +7,15 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    BlockchainBlockHeader: typeof import('./components/blockchain/block/Header.vue')['default']
     BlockchainBlockSectionHeader: typeof import('./components/blockchain/block/section/Header.vue')['default']
     BlockchainBlockSectionTable: typeof import('./components/blockchain/block/section/Table.vue')['default']
     BlockchainBlockSectionVotes: typeof import('./components/blockchain/block/section/Votes.vue')['default']
+    BlockchainBlockTable: typeof import('./components/blockchain/block/Table.vue')['default']
+    BlockchainBlockTransactionHeader: typeof import('./components/blockchain/block/transaction/Header.vue')['default']
+    BlockchainBlockTrxHeader: typeof import('./components/blockchain/block/trx/Header.vue')['default']
+    BlockchainBlockTrxOverview: typeof import('./components/blockchain/block/trx/Overview.vue')['default']
+    BlockchainBlockVotes: typeof import('./components/blockchain/block/Votes.vue')['default']
     BlockchainSectionHeader: typeof import('./components/blockchain/section/Header.vue')['default']
     BlockchainSectionTable: typeof import('./components/blockchain/section/Table.vue')['default']
     BlockchainSectionVotes: typeof import('./components/blockchain/section/Votes.vue')['default']
@@ -19,11 +25,17 @@ declare module 'vue' {
     HomeSectionCommunity: typeof import('./components/home/section/Community.vue')['default']
     HomeSectionHeader: typeof import('./components/home/section/Header.vue')['default']
     HomeSectionHighlight: typeof import('./components/home/section/Highlight.vue')['default']
+    Image: typeof import('primevue/image')['default']
     NavBar: typeof import('./components/NavBar.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SearchInput: typeof import('./components/SearchInput.vue')['default']
+    Tag: typeof import('primevue/tag')['default']
     TokensSectionHeader: typeof import('./components/tokens/section/Header.vue')['default']
+    TokensSectionHeaderBasicInfo: typeof import('./components/tokens/section/header/BasicInfo.vue')['default']
+    TokensSectionHeaderMore: typeof import('./components/tokens/section/header/More.vue')['default']
+    TokensSectionHeaderOverview: typeof import('./components/tokens/section/header/Overview.vue')['default']
+    'TokensSectionHeaderOverview.1': typeof import('./components/tokens/section/header/Overview.1.vue')['default']
     TokensSectionTable: typeof import('./components/tokens/section/Table.vue')['default']
   }
 }

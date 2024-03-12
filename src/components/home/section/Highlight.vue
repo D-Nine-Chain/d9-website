@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div>
+  <section>
     <h2 text-center text-4xl font-bold>
       {{ $t('page.home.highlight.t') }}
     </h2>
@@ -42,7 +42,7 @@
         </p>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <style lang=scss scoped>

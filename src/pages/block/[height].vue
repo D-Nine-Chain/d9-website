@@ -4,10 +4,10 @@
 
 <template>
   <div pb-16>
-    <BlockchainBlockSectionHeader />
+    <BlockchainBlockHeader />
 
     <div w-limited mt-36>
-      <BlockchainBlockSectionTable />
+      <BlockchainBlockTable />
     </div>
     <!-- <div w-limited mt-8>
       <BlockchainSectionVotes />

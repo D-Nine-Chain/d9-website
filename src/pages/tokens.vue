@@ -4,6 +4,11 @@
 
 <template>
   <div pb-16>
+    <div w-limited mt-14>
+      <TokensSectionHeader />
+
+      <TokensSectionTable mt-12 />
+    </div>
     <!-- <BlockchainBlockSectionHeader />
 
     <div w-limited mt-36>
