@@ -5,17 +5,17 @@
 <template>
   <div pb-16>
     <div w-limited mt-14>
-      <TokensSectionHeader />
+      <TokensHeader />
 
-      <TokensSectionTable mt-12 />
+      <TokensTable mt-12 />
     </div>
-    <!-- <BlockchainBlockSectionHeader />
+    <!-- <BlockchainBlockHeader />
 
     <div w-limited mt-36>
-      <BlockchainBlockSectionTable />
+      <BlockchainBlockTable />
     </div> -->
     <!-- <div w-limited mt-8>
-      <BlockchainSectionVotes />
+      <BlockchainVotes />
     </div>
  -->
   </div>

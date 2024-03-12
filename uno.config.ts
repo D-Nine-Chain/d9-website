@@ -37,6 +37,7 @@ export default defineConfig({
       'bg': 'var(--home-background)',
       'brand-gradient': 'var(--gradient)',
       'brand': 'var(--brand)',
+      't-usdt': 'var(--token-usdt)',
     },
     fontFamily: {
       'ds-digi': 'ds-digi',

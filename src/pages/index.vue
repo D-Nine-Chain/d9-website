@@ -8,11 +8,11 @@ preferredDark.value = false
 
 <template>
   <div w-limited>
-    <HomeSectionHeader min-h-50vh />
+    <HomeHeader min-h-50vh />
 
-    <HomeSectionCommunity mt-20 min-h-50vh />
+    <HomeCommunity mt-20 min-h-50vh />
 
-    <HomeSectionHighlight mt-20 min-h-50vh />
+    <HomeHighlight mt-20 min-h-50vh />
   </div>
 </template>
 

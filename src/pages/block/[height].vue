@@ -10,7 +10,7 @@
       <BlockchainBlockTable />
     </div>
     <!-- <div w-limited mt-8>
-      <BlockchainSectionVotes />
+      <BlockchainVotes />
     </div>
   -->
   </div>

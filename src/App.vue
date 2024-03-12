@@ -39,6 +39,7 @@ const navOffsetY = computed(() => {
 html {
   --background: rgb(249, 250, 252);
   --brand: rgb(0, 102, 255);
+  --token-usdt: #1ba27a;
   --content-max-width: 1266px;
   --content-x-padding: 2rem;
   --nav-height: calc(60px + 62px);
@@ -50,7 +51,8 @@ html {
 
   @media (max-width: 960px) {
     --nav-height: 60px;
-    --nav-translate-y: 0;
+    --nav-translate-y: 0.5rem;
+    --content-x-padding: 1rem;
   }
 }
 </style>

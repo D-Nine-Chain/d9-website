@@ -25,7 +25,7 @@ const items = [{
     <SearchInput />
 
     <section class="block">
-      <h2 text-black font-900>
+      <h2 text-1.125rem text-black font-900>
         Block
       </h2>
 
@@ -67,7 +67,7 @@ const items = [{
 <style lang="scss" scoped>
 .block {
   background-color: rgba(255, 255, 255, 0.4);
-  @apply shadow-sm p-8 rounded-2xl mt-3.75rem;
+  @apply shadow-sm px-2.375rem py-2rem rounded-2xl mt-3.75rem;
 }
 .item-wrapper {
   @apply grid-cols-[repeat(auto-fill,minmax(16rem,1fr))] grid gap-8;

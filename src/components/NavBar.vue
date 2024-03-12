@@ -13,6 +13,9 @@ const routes: { path: keyof RouteNamedMap, name: string }[] = [{
 }, {
   path: '/tokens',
   name: 'Tokens',
+}, {
+  path: '/wallet',
+  name: 'Wallet',
 }]
 const { dark } = toRefs(props)
 </script>
@@ -29,7 +32,7 @@ const { dark } = toRefs(props)
 
       <div flex-grow />
 
-      <ul h-full row items-center font-bold lt-md:hidden>
+      <ul h-full row items-center lt-md:hidden>
         <!-- eslint-disable-next-line vue/no-template-shadow -->
         <li v-for="route, index in routes" :key="index">
           <router-link active-class="active" :to="{ path: route.path }">
@@ -38,7 +41,7 @@ const { dark } = toRefs(props)
         </li>
       </ul>
 
-      <button class="primary" ml-8 shrink-0>
+      <button class="primary" ml-8 shrink-0 px-5 py-1.5 lg:px-7>
         Log in
       </button>
     </div>
@@ -49,7 +52,7 @@ const { dark } = toRefs(props)
 ul {
   li {
     transition: all 0.4s ease-out;
-    @apply px-4 h-full hover:cursor-pointer hover:text-gray-200 text-gray-400 col align-central;
+    @apply px-2 lg:px-6 xl:px-8 h-full hover:cursor-pointer hover:text-gray-200 text-gray-400 col align-central;
 
     .active {
       @apply text-gray-100 font-bold;
