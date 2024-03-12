@@ -29,17 +29,19 @@ const items = [{
         Block
       </h2>
 
-      <div class="grid-cols-[repeat(auto-fill,minmax(16rem,1fr))]" grid mt-8 gap-8>
-        <div
-          v-for="item, index in items" :key="index"
-          rounded-xl bg-white px-6 py-4
+      <div class="item-wrapper" mt-8>
+        <router-link
+          v-for="item, index in items"
+          :key="index"
+          :to="{ name: '/block/[height]', params: { height: 233 } }" class="item"
+          px-6 py-4
         >
           <p w-full row items-center font-bold>
             <span grow overflow-hidden text-ellipsis>
               #{{ item.height }}
             </span>
 
-            <button class="chain-cloud" shrink-0 rounded px-2 py-1 text-.6rem>
+            <button class="chain-cloud" px-2 py-1 text-.6rem>
               CHAIN CLOUD
             </button>
           </p>
@@ -56,7 +58,7 @@ const items = [{
             <span>Reward</span>
             <span ml-2 text-brand>{{ item.reward }} D9</span>
           </p>
-        </div>
+        </router-link>
       </div>
     </div>
   </CoverWrapper>
@@ -67,7 +69,15 @@ const items = [{
   background-color: rgba(255, 255, 255, 0.4);
   @apply shadow-sm p-8 rounded-2xl mt-3.75rem;
 }
-.chain-cloud {
-  background-color: rgba(219, 226, 234, 0.644);
+.item-wrapper {
+  @apply grid-cols-[repeat(auto-fill,minmax(16rem,1fr))] grid gap-8;
+
+  .item {
+    @apply rounded-xl bg-white;
+    .chain-cloud {
+      background-color: rgba(219, 226, 234, 0.644);
+      @apply shrink-0 rounded;
+    }
+  }
 }
 </style>

@@ -7,6 +7,9 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    BlockchainBlockSectionHeader: typeof import('./components/blockchain/block/section/Header.vue')['default']
+    BlockchainBlockSectionTable: typeof import('./components/blockchain/block/section/Table.vue')['default']
+    BlockchainBlockSectionVotes: typeof import('./components/blockchain/block/section/Votes.vue')['default']
     BlockchainSectionHeader: typeof import('./components/blockchain/section/Header.vue')['default']
     BlockchainSectionTable: typeof import('./components/blockchain/section/Table.vue')['default']
     BlockchainSectionVotes: typeof import('./components/blockchain/section/Votes.vue')['default']

@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div>
+  <div pb-16>
     <BlockchainSectionHeader />
 
     <div w-limited mt-8>

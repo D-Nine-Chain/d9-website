@@ -4,15 +4,15 @@
 
 <template>
   <div pb-16>
-    <!-- <BlockchainBlockSectionHeader />
+    <BlockchainBlockSectionHeader />
 
     <div w-limited mt-36>
       <BlockchainBlockSectionTable />
-    </div> -->
+    </div>
     <!-- <div w-limited mt-8>
       <BlockchainSectionVotes />
     </div>
- -->
+  -->
   </div>
 </template>
 
