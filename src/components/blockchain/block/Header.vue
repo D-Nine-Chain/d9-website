@@ -1,5 +1,11 @@
 <script setup lang="ts">
 import { format, formatDistance } from 'date-fns'
+
+const {
+  height,
+} = defineProps<{
+  height: string
+}>()
 </script>
 
 <template>
@@ -9,7 +15,7 @@ import { format, formatDistance } from 'date-fns'
     <section class="block card-shadow">
       <h2 text-2.25rem text-black font-900>
         <span class="text-gradient">
-          Block #233666
+          Block #{{ height }}
         </span>
 
         <span class="producer-block">

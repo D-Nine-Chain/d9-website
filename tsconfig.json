@@ -5,9 +5,11 @@
     "lib": ["DOM", "ESNext"],
     "baseUrl": ".",
     "module": "ESNext",
-    "moduleResolution": "node",
+    "moduleResolution": "Bundler",
     "paths": {
-      "~/*": ["src/*"]
+      "~/*": ["src/*"],
+      "@polkadot/api/augment": ["src/interfaces/augment-api.ts"],
+      "@polkadot/types/augment": ["src/interfaces/augment-types.ts"]
     },
     "resolveJsonModule": true,
     "types": [
@@ -25,5 +27,11 @@
     "isolatedModules": true,
     "skipLibCheck": true
   },
+  // "include": [
+  //   "./src/typed-router.d.ts",
+  //   "./src/shims.d.ts",
+  //   "./src/components.d.ts",
+  //   "./src/auto-imports.d.ts"
+  // ],
   "exclude": ["dist", "node_modules", "cypress", "eslint.config.js"]
 }

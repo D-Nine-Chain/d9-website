@@ -6,6 +6,9 @@ import { routes } from 'vue-router/auto-routes'
 import App from './App.vue'
 import type { UserModule } from './types'
 
+import './interfaces/augment-api'
+import './interfaces/augment-types'
+
 import '@unocss/reset/tailwind-compat.css'
 import './styles/main.scss'
 import 'uno.css'

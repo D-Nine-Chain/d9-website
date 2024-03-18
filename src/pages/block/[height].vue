@@ -1,10 +1,12 @@
 <script setup lang="ts">
+const route = useRoute('/block/[height]')
 
+const { height } = route.params
 </script>
 
 <template>
   <div pb-16>
-    <BlockchainBlockHeader />
+    <BlockchainBlockHeader :height="height" />
 
     <div w-limited mt-36>
       <BlockchainBlockTable />

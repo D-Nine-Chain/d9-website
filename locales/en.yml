@@ -10,6 +10,27 @@ intro:
   whats-your-name: What's your name?
 not-found: Not found
 page:
+  search:
+    hint: Search by Token / Account / Contract / Hash / Block
+  blockchain:
+    header-blocks:
+      title: Block
+      item:
+        chain-cloud: CHAIN CLOUD
+        reward: Reward
+    votes:
+      title: Votes
+      subtitle: Real-time total votes this round
+      next-round: Next Round
+    blocks-table:
+      col1: Name
+      col2: Ranking
+      col3: Real-Time Votes
+      col4: Percentage
+      col5: Productivity
+      col6: Reward Distribution
+      col7: APR
+      col8: My Votes
   home:
     community:
       t: Community Background

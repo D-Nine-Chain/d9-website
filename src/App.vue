@@ -1,5 +1,8 @@
 <script setup lang="ts">
 // https://github.com/vueuse/head
+import './composables/d9'
+import './composables/headers'
+
 useHead({
   title: 'D9 Network',
   meta: [
@@ -9,14 +12,14 @@ useHead({
     },
     {
       name: 'theme-color',
-      content: () => isDark.value ? '#00aba9' : '#ffffff',
+      content: () => '#ffffff',
     },
   ],
   link: [
     {
       rel: 'icon',
       type: 'image/svg+xml',
-      href: () => preferredDark.value ? '/favicon-dark.svg' : '/favicon.svg',
+      href: () => '/favicon.svg',
     },
   ],
 })

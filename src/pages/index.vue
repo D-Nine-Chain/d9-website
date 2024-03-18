@@ -2,7 +2,7 @@
 defineOptions({
   name: 'IndexPage',
 })
-isDark.value = false
+const preferredDark = usePreferredDark()
 preferredDark.value = false
 </script>
 

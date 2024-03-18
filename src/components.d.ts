@@ -33,6 +33,7 @@ declare module 'vue' {
     HomeSectionHighlight: typeof import('./components/home/section/Highlight.vue')['default']
     Image: typeof import('primevue/image')['default']
     NavBar: typeof import('./components/NavBar.vue')['default']
+    ProgressSpinner: typeof import('primevue/progressspinner')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SearchInput: typeof import('./components/SearchInput.vue')['default']

@@ -7,14 +7,14 @@ const value = ref([{ label: '', value: 15, color: 'green', icon: '' }])
 <template>
   <section class="card-shadow" rounded-2xl p-8>
     <h2 text-black font-900>
-      Votes
+      {{ $t('page.blockchain.votes.title') }}
     </h2>
     <div ml-3.75rem mt-0.625rem mt-2.3125rem row items-center>
       <img w-6.25rem shrink-0 object-contain src="/imgs/blockchain-vote-left.png" alt="Blockchain Votes left icon">
 
       <dl ml-1.625rem grow>
         <dt style="color: rgba(96, 199, 222, 1)">
-          Real-time total votes this round
+          {{ $t('page.blockchain.votes.subtitle') }}
         </dt>
         <dd mt-1.4375rem text-1.6875rem font-bold>
           <span vertical-mid>
@@ -27,7 +27,7 @@ const value = ref([{ label: '', value: 15, color: 'green', icon: '' }])
       <dl shrink-0 text-center>
         <dt>
           <span vertical-mid text-gradient>
-            Next Round
+            {{ $t('page.blockchain.votes.next-round') }}
           </span>
 
           <span ml-1.875rem vertical-mid text-3.375rem font-ds-digii>

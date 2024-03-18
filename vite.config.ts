@@ -25,14 +25,13 @@ export default defineConfig({
   },
 
   plugins: [
-    Vue({
-      include: [/\.vue$/],
-    }),
-
     // https://github.com/posva/unplugin-vue-router
     VueRouter({
-      extensions: ['.vue', '.md'],
       dts: 'src/typed-router.d.ts',
+    }),
+
+    Vue({
+      include: [/\.vue$/],
     }),
 
     // https://github.com/JohnCampionJr/vite-plugin-vue-layouts

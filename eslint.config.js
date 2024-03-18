@@ -6,8 +6,9 @@ export default antfu(
     unocss: true,
     formatters: true,
     rules: {
-      'no-console': 'warn',
+      'no-console': 'off',
       'no-debugger': 'warn',
+      'eslint-comments/no-unlimited-disable': 'off',
     },
   },
 )

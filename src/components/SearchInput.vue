@@ -3,11 +3,11 @@ const query = ref('')
 </script>
 
 <template>
-  <search class="search-bar b-1 b-[rgba(200,202,206,1)]">
+  <div class="search-bar b-1 b-[rgba(200,202,206,1)]">
     <div i-carbon-search mr-3 color-brand />
 
     <input v-model="query" grow placeholder="Search by Token / Account / Contract / Hash / Block">
-  </search>
+  </div>
 </template>
 
 <style scoped>

@@ -2,13 +2,18 @@
   "cSpell.words": [
     "antfu",
     "Attributify",
+    "consts",
     "demi",
+    "digii",
     "iconify",
     "intlify",
     "pinia",
+    "pino",
     "pnpm",
     "primevue",
     "Satoshi",
+    "taze",
+    "unhead",
     "unocss",
     "unplugin",
     "Vite",
@@ -66,5 +71,6 @@
     "jsonc",
     "yaml"
   ],
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.preferences.autoImportFileExcludePatterns": ["vue-router$"]
 }
