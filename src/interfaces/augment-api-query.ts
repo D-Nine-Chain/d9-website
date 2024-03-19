@@ -10,6 +10,7 @@ import type { Bytes, Option, U8aFixed, Vec, WrapperOpaque, bool, u128, u32, u64 
 import type { AnyNumber, ITuple } from '@polkadot/types-codec/types';
 import type { AccountId32, Call, H256 } from '@polkadot/types/interfaces/runtime';
 import type { Observable } from '@polkadot/types/types';
+import { D9NodeRuntimeOpaqueSessionKeys, FrameSupportDispatchPerDispatchClassWeight, FrameSystemAccountInfo, FrameSystemEventRecord, FrameSystemLastRuntimeUpgradeInfo, FrameSystemPhase, PalletAssetsApproval, PalletAssetsAssetAccount, PalletAssetsAssetDetails, PalletAssetsAssetMetadata, PalletCollectiveVotes, PalletContractsStorageContractInfo, PalletContractsStorageDeletionQueueManager, PalletContractsWasmOwnerInfo, PalletContractsWasmPrefabWasmModule, PalletD9BalancesAccountData, PalletD9BalancesBalanceLock, PalletD9BalancesIdAmount, PalletD9BalancesReserveData, PalletD9NodeVotingStructsNodeMetadataStruct, PalletD9NodeVotingStructsValidatorVoteStats, PalletD9NodeVotingStructsVotingInterest, PalletGrandpaStoredPendingChange, PalletGrandpaStoredState, PalletImOnlineBoundedOpaqueNetworkState, PalletImOnlineSr25519AppSr25519Public, PalletMultisigMultisig, PalletTransactionPaymentReleases, PalletTreasuryProposal, SpAuthorityDiscoveryAppPublic, SpConsensusAuraSr25519AppSr25519Public, SpCoreCryptoKeyTypeId, SpRuntimeDigest } from '@polkadot/types/lookup';
 
 export type __AugmentedQuery<ApiType extends ApiTypes> = AugmentedQuery<ApiType, () => unknown>;
 export type __QueryableStorageEntry<ApiType extends ApiTypes> = QueryableStorageEntry<ApiType>;
@@ -47,7 +48,7 @@ declare module '@polkadot/api-base/types/storage' {
       authorities: AugmentedQuery<ApiType, () => Observable<Vec<SpConsensusAuraSr25519AppSr25519Public>>, []> & QueryableStorageEntry<ApiType, []>;
       /**
        * The current slot of this block.
-       * 
+       *
        * This will be set in `on_initialize`.
        **/
       currentSlot: AugmentedQuery<ApiType, () => Observable<u64>, []> & QueryableStorageEntry<ApiType, []>;
@@ -73,25 +74,25 @@ declare module '@polkadot/api-base/types/storage' {
     balances: {
       /**
        * The Balances pallet example of storing the balance of an account.
-       * 
+       *
        * # Example
-       * 
+       *
        * ```nocompile
        * impl pallet_balances::Config for Runtime {
        * type AccountStore = StorageMapShim<Self::Account<Runtime>, frame_system::Provider<Runtime>, AccountId, Self::AccountData<Balance>>
        * }
        * ```
-       * 
+       *
        * You can also store the balance of an account in the `System` pallet.
-       * 
+       *
        * # Example
-       * 
+       *
        * ```nocompile
        * impl pallet_balances::Config for Runtime {
        * type AccountStore = System
        * }
        * ```
-       * 
+       *
        * But this comes with tradeoffs, storing account balances in the system pallet stores
        * `frame_system` data alongside the account data contrary to storing account balances in the
        * `Balances` pallet, which uses a `StorageMap` to store balances data only.
@@ -165,13 +166,13 @@ declare module '@polkadot/api-base/types/storage' {
       codeStorage: AugmentedQuery<ApiType, (arg: H256 | string | Uint8Array) => Observable<Option<PalletContractsWasmPrefabWasmModule>>, [H256]> & QueryableStorageEntry<ApiType, [H256]>;
       /**
        * The code associated with a given account.
-       * 
+       *
        * TWOX-NOTE: SAFE since `AccountId` is a secure hash.
        **/
       contractInfoOf: AugmentedQuery<ApiType, (arg: AccountId32 | string | Uint8Array) => Observable<Option<PalletContractsStorageContractInfo>>, [AccountId32]> & QueryableStorageEntry<ApiType, [AccountId32]>;
       /**
        * Evicted contracts that await child trie deletion.
-       * 
+       *
        * Child trie deletion is a heavy operation depending on the amount of storage items
        * stored in said trie. Therefore this operation is performed lazily in `on_idle`.
        **/
@@ -183,25 +184,25 @@ declare module '@polkadot/api-base/types/storage' {
       deletionQueueCounter: AugmentedQuery<ApiType, () => Observable<PalletContractsStorageDeletionQueueManager>, []> & QueryableStorageEntry<ApiType, []>;
       /**
        * This is a **monotonic** counter incremented on contract instantiation.
-       * 
+       *
        * This is used in order to generate unique trie ids for contracts.
        * The trie id of a new contract is calculated from hash(account_id, nonce).
        * The nonce is required because otherwise the following sequence would lead to
        * a possible collision of storage:
-       * 
+       *
        * 1. Create a new contract.
        * 2. Terminate the contract.
        * 3. Immediately recreate the contract with the same account_id.
-       * 
+       *
        * This is bad because the contents of a trie are deleted lazily and there might be
        * storage of the old instantiation still in it when the new contract is created. Please
        * note that we can't replace the counter by the block number because the sequence above
        * can happen in the same block. We also can't keep the account counter in memory only
        * because storage is the only way to communicate across different extrinsics in the
        * same block.
-       * 
+       *
        * # Note
-       * 
+       *
        * Do not use it to determine the number of contracts. It won't be decremented if
        * a contract is destroyed.
        **/
@@ -233,14 +234,14 @@ declare module '@polkadot/api-base/types/storage' {
       currentValidatorVoteStats: AugmentedQuery<ApiType, (arg: AccountId32 | string | Uint8Array) => Observable<Option<PalletD9NodeVotingStructsValidatorVoteStats>>, [AccountId32]> & QueryableStorageEntry<ApiType, [AccountId32]>;
       /**
        * grand total of votes for a candidate
-       * 
+       *
        * this Map can be no larger than MaxCandidates
        **/
       nodeAccumulativeVotes: AugmentedQuery<ApiType, (arg: AccountId32 | string | Uint8Array) => Observable<Option<u64>>, [AccountId32]> & QueryableStorageEntry<ApiType, [AccountId32]>;
       nodeMetadata: AugmentedQuery<ApiType, (arg: AccountId32 | string | Uint8Array) => Observable<Option<PalletD9NodeVotingStructsNodeMetadataStruct>>, [AccountId32]> & QueryableStorageEntry<ApiType, [AccountId32]>;
       /**
        * defines the supporters of a candidate
-       * 
+       *
        * candidate -> supporter -> votes
        * UserToNodeVotesTotals == NodeToUserVotesTotals
        **/
@@ -253,7 +254,7 @@ declare module '@polkadot/api-base/types/storage' {
       usersVotingInterests: AugmentedQuery<ApiType, (arg: AccountId32 | string | Uint8Array) => Observable<Option<PalletD9NodeVotingStructsVotingInterest>>, [AccountId32]> & QueryableStorageEntry<ApiType, [AccountId32]>;
       /**
        * defines the vote distribution of a user to some candidate
-       * 
+       *
        * user -> candidate -> votes
        * UserToNodeVotesTotals == NodeToUserVotesTotals
        **/
@@ -310,13 +311,13 @@ declare module '@polkadot/api-base/types/storage' {
       /**
        * A mapping from grandpa set ID to the index of the *most recent* session for which its
        * members were responsible.
-       * 
+       *
        * This is only used for validating equivocation proofs. An equivocation proof must
        * contains a key-ownership proof for a given session, therefore we need a way to tie
        * together sessions and GRANDPA set ids, i.e. we need to validate that a validator
        * was the owner of a given key on a given session, and what the active set ID was
        * during that session.
-       * 
+       *
        * TWOX-NOTE: `SetId` is not under user control.
        **/
       setIdSession: AugmentedQuery<ApiType, (arg: u64 | AnyNumber | Uint8Array) => Observable<Option<u32>>, [u64]> & QueryableStorageEntry<ApiType, [u64]>;
@@ -356,12 +357,12 @@ declare module '@polkadot/api-base/types/storage' {
       /**
        * The block number after which it's ok to send heartbeats in the current
        * session.
-       * 
+       *
        * At the beginning of each session we set this to a value that should fall
        * roughly in the middle of the session duration. The idea is to first wait for
        * the validators to produce a block in the current session, so that the
        * heartbeat later on will not be necessary.
-       * 
+       *
        * This value will only be used as a fallback if we fail to get a proper session
        * progress estimate from `NextSessionRotation`, as those estimates should be
        * more accurate then the value we calculate for `HeartbeatAfter`.
@@ -410,7 +411,7 @@ declare module '@polkadot/api-base/types/storage' {
       currentIndex: AugmentedQuery<ApiType, () => Observable<u32>, []> & QueryableStorageEntry<ApiType, []>;
       /**
        * Indices of disabled validators.
-       * 
+       *
        * The vec is always kept sorted so that we can find whether a given validator is
        * disabled using binary search. It gets cleared when `on_session_ending` returns
        * a new set of identities.
@@ -480,10 +481,10 @@ declare module '@polkadot/api-base/types/storage' {
       eventCount: AugmentedQuery<ApiType, () => Observable<u32>, []> & QueryableStorageEntry<ApiType, []>;
       /**
        * Events deposited for the current block.
-       * 
+       *
        * NOTE: The item is unbound and should therefore never be read on chain.
        * It could otherwise inflate the PoV size of a block.
-       * 
+       *
        * Events have a large in-memory size. Box the events to not go out-of-memory
        * just in case someone still reads them from within the runtime.
        **/
@@ -491,11 +492,11 @@ declare module '@polkadot/api-base/types/storage' {
       /**
        * Mapping between a topic (represented by T::Hash) and a vector of indexes
        * of events in the `<Events<T>>` list.
-       * 
+       *
        * All topic vectors have deterministic storage locations depending on the topic. This
        * allows light-clients to leverage the changes trie storage tracking mechanism and
        * in case of changes fetch the list of events of interest.
-       * 
+       *
        * The value has the type `(T::BlockNumber, EventIndex)` because if we used only just
        * the `EventIndex` then in case if the topic has the same contents on the next block
        * no notification will be triggered thus the event might be lost.

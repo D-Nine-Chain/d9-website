@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { useBalancesTransfer } from '~/composables/extrinsics/balances'
+import { useBalancesTransferEvents } from '~/composables/extrinsics/balances'
 
-const route = useRoute('/block/[height]')
+const route = useRoute('/block/[height]/')
 
 const { height } = route.params
 
-const { block } = await getBlock(height) ?? {}
+const { state: block } = await useBlock(height)
 
-const transfers = useBalancesTransfer(block)
+const transfers = useBalancesTransferEvents(block)
 </script>
 
 <template>

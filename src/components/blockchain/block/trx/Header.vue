@@ -1,5 +1,19 @@
 <script setup lang="ts">
+import type { GenericExtrinsic } from '@polkadot/types'
+import type { Block } from '@polkadot/types/interfaces'
+import type { AnyTuple } from '@polkadot/types/types'
 import { format, formatDistance } from 'date-fns'
+
+const props = defineProps<{
+  block: Block
+  extrinsic: GenericExtrinsic<AnyTuple>
+}>()
+
+const { extrinsic } = toRefs(props)
+
+const { state: block } = useBlock(props.block.header.number)
+const timestamp = useBlockTimestamp(block)
+const { state: fee } = useNetworkFee(block, computed(() => extrinsic.value.hash))
 </script>
 
 <template>
@@ -17,7 +31,7 @@ import { format, formatDistance } from 'date-fns'
             Hash:
           </dt>
           <dd>
-            d3413738697968f512172994bb9cf4270c7915467e2346962078acfd3258943a
+            {{ extrinsic.hash }}
           </dd>
         </div>
 
@@ -64,7 +78,7 @@ import { format, formatDistance } from 'date-fns'
             Block:
           </dt>
           <dd font-bold>
-            123321
+            {{ block?.header.number }}
           </dd>
         </div>
 
@@ -73,13 +87,15 @@ import { format, formatDistance } from 'date-fns'
             Time:
           </dt>
           <dd font-bold>
-            <span>
-              {{ formatDistance(new Date("2024/3/4"), new Date(), { addSuffix: true }) }}
-            </span>
-            |
-            <span>
-              {{ format(new Date(), "yyyy MM-dd HH:mm:ss(O)") }}
-            </span>
+            <template v-if="timestamp">
+              <span>
+                {{ formatDistance(timestamp, new Date(), { addSuffix: true }) }}
+              </span>
+              |
+              <span>
+                {{ format(timestamp, "yyyy MM-dd HH:mm:ss(O)") }}
+              </span>
+            </template>
           </dd>
         </div>
 
@@ -88,7 +104,7 @@ import { format, formatDistance } from 'date-fns'
             Resources Consumed & Fee:
           </dt>
           <dd font-bold>
-            4314.413412 D9
+            {{ fee?.actualFee?.toBigInt() }} D9
           </dd>
         </div>
       </dl>

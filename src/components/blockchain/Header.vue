@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { formatDistanceStrict } from 'date-fns'
 
-const items = asyncComputed(() => Promise.all(blocks.slice(0, 4).map(async ({ block, api }) => ({
+const items = asyncComputed(() => Promise.all(blocks.slice(0, 4).map(async block => ({
   height: block.header.number,
   reward: 0,
   hash: block.hash.toHex(),
-  time: (await api.query.timestamp.now()).toNumber(),
+  time: (await block.api.query.timestamp.now()).toNumber(),
 }))), [])
 </script>
 
@@ -26,7 +26,7 @@ const items = asyncComputed(() => Promise.all(blocks.slice(0, 4).map(async ({ bl
         />
         <router-link
           v-for="item in items"
-          v-else :key="item.hash" :to="{ name: '/block/[height]', params: { height: item.height.toString() } }"
+          v-else :key="item.hash" :to="{ name: '/block/[height]/', params: { height: item.height.toString() } }"
           class="item" px-6 py-4
         >
           <p w-full row items-center font-bold>

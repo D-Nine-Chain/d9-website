@@ -1,5 +1,5 @@
 <script lang=ts setup>
-const loaded = computed(() => !!d9Api.value)
+const loaded = computed(() => !!api.value)
 </script>
 
 <template>

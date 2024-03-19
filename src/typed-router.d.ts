@@ -20,8 +20,8 @@ declare module 'vue-router/auto-routes' {
   export interface RouteNamedMap {
     '/': RouteRecordInfo<'/', '/', Record<never, never>, Record<never, never>>,
     '/[...all]': RouteRecordInfo<'/[...all]', '/:all(.*)', { all: ParamValue<true> }, { all: ParamValue<false> }>,
-    '/block/[height]': RouteRecordInfo<'/block/[height]', '/block/:height', { height: ParamValue<true> }, { height: ParamValue<false> }>,
-    '/block/trx/[hash]': RouteRecordInfo<'/block/trx/[hash]', '/block/trx/:hash', { hash: ParamValue<true> }, { hash: ParamValue<false> }>,
+    '/block/[height]/': RouteRecordInfo<'/block/[height]/', '/block/:height', { height: ParamValue<true> }, { height: ParamValue<false> }>,
+    '/block/[height]/trx/[hash]': RouteRecordInfo<'/block/[height]/trx/[hash]', '/block/:height/trx/:hash', { height: ParamValue<true>, hash: ParamValue<true> }, { height: ParamValue<false>, hash: ParamValue<false> }>,
     '/blockchain': RouteRecordInfo<'/blockchain', '/blockchain', Record<never, never>, Record<never, never>>,
     '/tokens': RouteRecordInfo<'/tokens', '/tokens', Record<never, never>, Record<never, never>>,
     '/wallet': RouteRecordInfo<'/wallet', '/wallet', Record<never, never>, Record<never, never>>,

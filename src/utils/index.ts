@@ -1,3 +1,5 @@
+import type { GenericAccountId } from '@polkadot/types'
+
 // Captures 0x + 4 characters, then the last 4 characters.
 const truncateRegex = /^([a-zA-Z0-9]{8})[a-zA-Z0-9]+([a-zA-Z0-9]{5})$/
 
@@ -6,9 +8,13 @@ const truncateRegex = /^([a-zA-Z0-9]{8})[a-zA-Z0-9]+([a-zA-Z0-9]{5})$/
  * @param address Full address to truncate
  * @returns Truncated address
  */
-export function truncateAddress(address: string) {
-  const match = address.match(truncateRegex)
+export function truncateAddress(address: string | GenericAccountId) {
+  const match = (address.toString()).match(truncateRegex)
   if (!match)
-    return address
+    return address.toString()
   return `${match[1]}…${match[2]}`
+}
+
+export function truncate(str: string, left = 8, end = 5) {
+  return `${str.substring(0, left)}…${str.substring(str.length - end)}`
 }

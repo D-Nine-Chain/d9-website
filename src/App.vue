@@ -1,8 +1,4 @@
 <script setup lang="ts">
-// https://github.com/vueuse/head
-import './composables/d9'
-import './composables/headers'
-
 useHead({
   title: 'D9 Network',
   meta: [
@@ -25,10 +21,14 @@ useHead({
 })
 
 // useWalletStore()
+useD9Api()
+useD9NetworkWacher()
 
 const { y } = useWindowScroll()
-const navOffsetY = computed(() => {
-  return `${y.value > 60 ? 60 : 0}px`
+const navOffsetY = computed(() => `${y.value > 60 ? 60 : 0}px`)
+
+onErrorCaptured((err) => {
+  console.warn('error captured', err)
 })
 </script>
 

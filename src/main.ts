@@ -8,6 +8,7 @@ import type { UserModule } from './types'
 
 import './interfaces/augment-api'
 import './interfaces/augment-types'
+import '@polkadot/types/lookup'
 
 import '@unocss/reset/tailwind-compat.css'
 import './styles/main.scss'
