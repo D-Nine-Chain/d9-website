@@ -12,7 +12,7 @@
 
     <div class="items" grid grid-cols-1 mx-auto mt-28 gap-30 lg:grid-cols-3 lt-lg:max-w-120 lg:gap-8>
       <div>
-        <img class="translate-y--50%" h-9rem src="/imgs/home-highlights-1.png">
+        <img class="translate-y--50%" h-9rem src="/imgs/home-highlights-1.webp">
         <h3>
           {{ $t('page.home.highlight.item1.t') }}
         </h3>
@@ -23,7 +23,7 @@
       </div>
 
       <div>
-        <img class="translate-y--70%" h-8rem src="/imgs/home-highlights-2.png">
+        <img class="translate-y--70%" h-8rem src="/imgs/home-highlights-2.webp">
         <h3>
           {{ $t('page.home.highlight.item2.t') }}
         </h3>
@@ -34,7 +34,7 @@
       </div>
 
       <div>
-        <img class="translate-y--50%" h-8rem src="/imgs/home-highlights-3.png">
+        <img class="translate-y--50%" h-8rem src="/imgs/home-highlights-3.webp">
         <h3>{{ $t('page.home.highlight.item3.t') }}</h3>
         <div class="divider" />
         <p prose>

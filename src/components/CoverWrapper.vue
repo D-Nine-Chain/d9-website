@@ -12,7 +12,7 @@
 
 <style lang="scss" scoped>
 .header {
-  background-image: url(/imgs/cover.png);
+  background-image: url(/imgs/cover.webp);
   background-position: top;
   background-size: cover;
   margin-top: calc(var(--nav-height) * -1);

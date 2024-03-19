@@ -37,7 +37,7 @@
         <div class="sm:ml-8" row flex-grow items-center justify-between sm:max-w-28.75rem>
           <div row flex-shrink-1 flex-grow items-center justify-between>
             <div>
-              <img inline size-2.5rem rounded-full shadow-md src="/imgs/usdt.png">
+              <img inline size-2.5rem rounded-full shadow-md src="/imgs/usdt.webp">
               <span relative top-.5 ml-4 inline font-bold>
                 USDT
               </span>

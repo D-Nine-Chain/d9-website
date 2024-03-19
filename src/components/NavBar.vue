@@ -27,8 +27,8 @@ const { dark } = toRefs(props)
     sticky z-100 col items-stretch justify-end transition-top
   >
     <div w-limited mb-10px h-42px w-full row items-center>
-      <img v-if="dark" src="/imgs/dark-logo.png" alt="D9 Network Logo" h-full translate-y--1 lt-md:h-38px>
-      <img v-else src="/imgs/light-logo.png" alt="D9 Network Logo" h-full translate-y--1 lt-md:h-38px>
+      <img v-if="dark" src="/imgs/dark-logo.webp" alt="D9 Network Logo" h-full translate-y--1 lt-md:h-38px>
+      <img v-else src="/imgs/light-logo.webp" alt="D9 Network Logo" h-full translate-y--1 lt-md:h-38px>
 
       <div flex-grow />
 

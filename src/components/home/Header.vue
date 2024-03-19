@@ -23,7 +23,7 @@
       </div>
     </div>
     <div shrink-0 grow-14 md:w-1>
-      <img mx-auto max-w-200 w-full src="/imgs/home-header-img.png" alt="Homepage header img">
+      <img mx-auto max-w-200 w-full src="/imgs/home-header-img.webp" alt="Homepage header img">
     </div>
   </section>
 </template>
