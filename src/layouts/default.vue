@@ -1,4 +1,5 @@
 <script lang=ts setup>
+paused.value = false
 const loaded = computed(() => !!api.value)
 </script>
 

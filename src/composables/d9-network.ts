@@ -5,6 +5,8 @@ export const blocks = shallowReactive<WrappedBlock[]>([])
 
 const queue: Header[] = []
 
+export const paused = ref(true)
+
 export function useD9NetworkWacher() {
   const stopped = false
 
@@ -14,6 +16,7 @@ export function useD9NetworkWacher() {
       const unsub = await api.rpc.chain.subscribeNewHeads(async (lastHeader) => {
       // blockHeaders.unshift(lastHeader)
         queue.push(lastHeader)
+        queue.length > import.meta.env.VITE_APP_QUEUE_BUFFER && queue.shift()
       // ;(blockHeaders.length > import.meta.env.VITE_APP_KEEP_BLOCK) && blockHeaders.pop()
       })
       onCleanup(() => {
@@ -30,7 +33,7 @@ export function useD9NetworkWacher() {
 
   async function processQueue() {
     while (true) {
-      if (stopped || !queue.length || !api.value) {
+      if (stopped || paused.value || !queue.length || !api.value) {
         await new Promise(resolve => setTimeout(resolve, 500))
       }
       else {
