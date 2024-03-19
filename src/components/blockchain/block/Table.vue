@@ -1,4 +1,18 @@
 <script setup lang="ts">
+import type { GenericExtrinsic, Vec } from '@polkadot/types'
+import type { AnyTuple } from '@polkadot/types/types'
+
+const {
+  extrinsics,
+} = defineProps<{
+  extrinsics: Vec<GenericExtrinsic<AnyTuple>>
+}>()
+
+console.info(extrinsics?.filter((extrinsic) => {
+  const { section, method } = extrinsic.method
+  return section === 'balances' && method === 'transfer'
+}))
+
 const products = [{
   hash: '1',
   block: '2',

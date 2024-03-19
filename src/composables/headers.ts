@@ -27,6 +27,38 @@ watch(d9Api, async (d9Api, _oldValue, onCleanup) => {
   }
 }, { immediate: true })
 
+export async function getBlock(height: number | string): Promise<{ block: Block, api: ApiDecoration<'promise'> } | undefined> {
+  try {
+    const cached = blocks.find(block => block.block.header.number.toNumber() === Number(height))
+    if (cached)
+      return cached
+    if (!d9Api.value)
+      return undefined
+    const blockHash = await d9Api.value.rpc.chain.getBlockHash(+height)
+    if (blockHash.isEmpty)
+      return undefined
+    const singedBlock = await d9Api.value.rpc.chain.getBlock(blockHash)
+    if (singedBlock.isEmpty)
+      return undefined
+    const found = {
+      block: singedBlock.block,
+      api: await d9Api.value.at(blockHash),
+    }
+    const idx = blocks.findIndex(block =>
+      found.block.header.number.toNumber() < block.block.header.number.toNumber(),
+    )
+    if (idx !== -1)
+      blocks.splice(idx, 0, found)
+    else
+      blocks.unshift(found)
+    return found
+  }
+  catch (err) {
+    console.warn('getBlock', 'err', err)
+    return undefined
+  }
+}
+
 async function processQueue() {
   // eslint-disable-next-line no-unmodified-loop-condition
   while (keepRunning) {
@@ -42,6 +74,7 @@ async function processQueue() {
           block,
           api,
         })
+        ;(blocks.length > 1000) && blocks.pop()
       }
       catch (err) {
         console.error('get block info failed.', err)

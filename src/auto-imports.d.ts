@@ -38,10 +38,12 @@ declare global {
   const effectScope: typeof import('vue')['effectScope']
   const endpoint: typeof import('./composables/d9')['endpoint']
   const extendRef: typeof import('@vueuse/core')['extendRef']
+  const getBlock: typeof import('./composables/headers')['getBlock']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
   const h: typeof import('vue')['h']
   const ignorableWatch: typeof import('@vueuse/core')['ignorableWatch']
+  const initConnection: typeof import('./composables/d9')['initConnection']
   const inject: typeof import('vue')['inject']
   const injectLocal: typeof import('@vueuse/core')['injectLocal']
   const isDark: typeof import('./composables/dark')['isDark']
@@ -341,6 +343,7 @@ declare module 'vue' {
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
     readonly endpoint: UnwrapRef<typeof import('./composables/d9')['endpoint']>
     readonly extendRef: UnwrapRef<typeof import('@vueuse/core')['extendRef']>
+    readonly getBlock: UnwrapRef<typeof import('./composables/headers')['getBlock']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
@@ -633,6 +636,7 @@ declare module '@vue/runtime-core' {
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
     readonly endpoint: UnwrapRef<typeof import('./composables/d9')['endpoint']>
     readonly extendRef: UnwrapRef<typeof import('@vueuse/core')['extendRef']>
+    readonly getBlock: UnwrapRef<typeof import('./composables/headers')['getBlock']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly h: UnwrapRef<typeof import('vue')['h']>

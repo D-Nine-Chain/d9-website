@@ -5,6 +5,8 @@
     "consts",
     "demi",
     "digii",
+    "extrinsics",
+    "gsap",
     "iconify",
     "intlify",
     "pinia",

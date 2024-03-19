@@ -2,19 +2,21 @@
 const route = useRoute('/block/[height]')
 
 const { height } = route.params
+
+const { block } = await getBlock(height) ?? {}
 </script>
 
 <template>
   <div pb-16>
-    <BlockchainBlockHeader :height="height" />
+    <template v-if="block">
+      <BlockchainBlockHeader :block="block" />
 
-    <div w-limited mt-36>
-      <BlockchainBlockTable />
-    </div>
-    <!-- <div w-limited mt-8>
-      <BlockchainVotes />
-    </div>
-  -->
+      <div w-limited mt-36>
+        <BlockchainBlockTable :extrinsics="block.extrinsics" />
+      </div>
+    </template>
+
+    <Discarded v-else />
   </div>
 </template>
 

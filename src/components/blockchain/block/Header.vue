@@ -1,10 +1,11 @@
 <script setup lang="ts">
+import type { Block } from '@polkadot/types/interfaces'
 import { format, formatDistance } from 'date-fns'
 
 const {
-  height,
+  block,
 } = defineProps<{
-  height: string
+  block: Block
 }>()
 </script>
 
@@ -15,7 +16,7 @@ const {
     <section class="block card-shadow">
       <h2 text-2.25rem text-black font-900>
         <span class="text-gradient">
-          Block #{{ height }}
+          Block #{{ block.header.number }}
         </span>
 
         <span class="producer-block">
@@ -29,7 +30,7 @@ const {
             Block Hash:
           </dt>
           <dd>
-            0000000003612a9bb8a02635009fa835343767cb3eaf2111c0c2bb986090348a
+            {{ block.hash }}
           </dd>
         </div>
 
@@ -70,7 +71,7 @@ const {
         <div>
           <dt>Parent Block Hash:</dt>
           <dd font-bold>
-            0000000003612a9a5ace92362b5a7409b238b4bbf9e6cfa7e03780a1631334ae
+            {{ block.header.parentHash }}
           </dd>
         </div>
       </dl>
