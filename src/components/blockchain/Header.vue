@@ -27,7 +27,8 @@ const items = asyncComputed(() => Promise.all(blocks.slice(0, 4).map(async block
         <router-link
           v-for="item in items"
           v-else :key="item.hash" :to="{ name: '/block/[height]/', params: { height: item.height.toString() } }"
-          class="item" px-6 py-4
+          class="item"
+          px-6 py-4 animated animated-flip-in-x
         >
           <p w-full row items-center font-bold>
             <span grow overflow-hidden text-ellipsis>

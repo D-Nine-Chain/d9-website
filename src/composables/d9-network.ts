@@ -6,7 +6,7 @@ export const blocks = shallowReactive<WrappedBlock[]>([])
 const queue: Header[] = []
 
 export function useD9NetworkWacher() {
-  let stopped = false
+  const stopped = false
 
   watch(api, async (api, _oldValue, onCleanup) => {
     console.info('d9Api', 'changes', api?.genesisHash.toHex(), 'old one', _oldValue?.genesisHash.toHex())
@@ -57,13 +57,13 @@ export function useD9NetworkWacher() {
     processQueue()
   })
 
-  onActivated(() => {
-    stopped = false
-  })
+  // onActivated(() => {
+  //   stopped = false
+  // })
 
-  onDeactivated(() => {
-    stopped = true
-  })
+  // onDeactivated(() => {
+  //   stopped = true
+  // })
 
   return {}
 }

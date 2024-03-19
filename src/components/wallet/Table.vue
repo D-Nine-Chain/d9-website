@@ -14,11 +14,11 @@ const products = [{
 <template>
   <section>
     <DataTable :value="products" :table-style="{ 'min-width': '50rem' }">
-      <Column field="hash" header="Hash">
+      <!-- <Column field="hash" header="Hash">
         <template #body="slotProps">
           <router-link
             font-bold text-gradient :to="{
-              name: '/block/trx/[hash]',
+              name: '/block/[height]/trx/[hash]',
               params: {
                 hash: slotProps.data.hash,
               },
@@ -27,7 +27,7 @@ const products = [{
             {{ slotProps.data.hash }}
           </router-link>
         </template>
-      </Column>
+      </Column> -->
       <Column field="block" header="Block" />
       <Column field="age" header="Age" />
       <Column field="trxType" header="Transaction Type" />

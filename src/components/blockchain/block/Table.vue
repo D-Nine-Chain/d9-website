@@ -8,15 +8,11 @@ import { truncate, truncateAddress } from '~/utils'
 const props = defineProps<{
   transfers: UnwrapRef<ReturnType<typeof useBalancesTransferEvents>>
 }>()
-
-watch(() => props.transfers, (transfers) => {
-  console.info('transfers', transfers)
-}, { immediate: true })
 </script>
 
 <template>
   <section>
-    <DataTable :value="$props.transfers" :table-style="{ 'min-width': '50rem' }">
+    <DataTable :value="props.transfers" :table-style="{ 'min-width': '50rem' }">
       <Column field="hash" header="Hash">
         <template #body="{ data: { extrinsic, header } }">
           <router-link

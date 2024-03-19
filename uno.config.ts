@@ -8,6 +8,7 @@ import {
   transformerDirectives,
   transformerVariantGroup,
 } from 'unocss'
+import { animatedUno } from 'animated-unocss'
 
 export default defineConfig({
   shortcuts: [
@@ -63,6 +64,7 @@ export default defineConfig({
         mono: 'JetBrains Mono',
       },
     }),
+    animatedUno(),
   ],
   transformers: [
     transformerDirectives(),

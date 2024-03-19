@@ -1,5 +1,11 @@
 <script setup lang="ts">
+import BigNumber from 'bignumber.js'
 
+const { state: totalIssuance } = useAsyncState(async () => await api.value?.query.balances.totalIssuance().then(result => new BigNumber(result.toHex())), new BigNumber(0))
+const totalIssuanceBN = useD9TokenAmount(totalIssuance)
+const { n } = useI18n()
+
+const totalIssuanceFormatted = computed(() => n(totalIssuanceBN.value.toNumber(), { maximumFractionDigits: 0 }))
 </script>
 
 <template>
@@ -17,7 +23,7 @@
           Total Supply:
         </dd>
         <dt>
-          880,000.000,000.000
+          {{ totalIssuanceFormatted }}
         </dt>
       </div>
 

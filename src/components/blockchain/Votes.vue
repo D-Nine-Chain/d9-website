@@ -9,14 +9,14 @@ const value = ref([{ label: '', value: 15, color: 'green', icon: '' }])
     <h2 text-black font-900>
       {{ $t('page.blockchain.votes.title') }}
     </h2>
-    <div ml-3.75rem mt-0.625rem mt-2.3125rem row items-center>
+    <div mt-1rem col items-center lg:mx-3.75rem lg:mt-2.3125rem lg:row>
       <img w-6.25rem shrink-0 object-contain src="/imgs/blockchain-vote-left.webp" alt="Blockchain Votes left icon">
 
-      <dl ml-1.625rem grow>
+      <dl mx-1.625rem grow lt-lg="text-center mt-8">
         <dt style="color: rgba(96, 199, 222, 1)">
           {{ $t('page.blockchain.votes.subtitle') }}
         </dt>
-        <dd mt-1.4375rem text-1.6875rem font-bold>
+        <dd mt-1.4375rem text-1.6875rem font-bold animated animated-flip-in-x>
           <span vertical-mid>
             45,249,388,709
           </span>
@@ -25,17 +25,17 @@ const value = ref([{ label: '', value: 15, color: 'green', icon: '' }])
       </dl>
 
       <dl shrink-0 text-center>
-        <dt>
-          <span vertical-mid text-gradient>
+        <dt animated animated-flip-in-x>
+          <span text-gradient sm:vertical-mid>
             {{ $t('page.blockchain.votes.next-round') }}
           </span>
 
-          <span ml-1.875rem vertical-mid text-3.375rem font-ds-digii>
+          <span text-3.375rem font-ds-digii md:ml-1.875rem sm:vertical-mid>
             00:00:09
           </span>
         </dt>
 
-        <MeterGroup :value="value" />
+        <MeterGroup lg:min-w-24rem :value="value" />
       </dl>
     </div>
   </section>
@@ -43,7 +43,6 @@ const value = ref([{ label: '', value: 15, color: 'green', icon: '' }])
 
 <style scoped lang='scss'>
 :deep(.p-metergroup) {
-  min-width: 24rem;
   .p-metergroup-labels {
     display: none;
   }

@@ -13,7 +13,7 @@ const products = [{
 
 <template>
   <section>
-    <DataTable :value="products" :table-style="{ 'min-width': '50rem' }">
+    <DataTable :value="products" :table-style="{ 'min-width': '60rem' }">
       <Column field="name" :header="$t('page.blockchain.blocks-table.col1')" />
       <Column field="ranking" :header="$t('page.blockchain.blocks-table.col2')" />
       <Column field="votes" :header="$t('page.blockchain.blocks-table.col3')" />

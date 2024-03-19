@@ -7,7 +7,7 @@ const loaded = computed(() => !!api.value)
     <NavBar dark />
 
     <RouterView v-slot="{ Component }">
-      <Transition>
+      <KeepAlive>
         <Suspense v-if="loaded">
           <component :is="Component" />
 
@@ -32,19 +32,7 @@ const loaded = computed(() => !!api.value)
         </Suspense>
 
         <DappLoading v-else />
-      </Transition>
+      </KeepAlive>
     </RouterView>
   </main>
 </template>
-
-<style lang="scss" scoped>
-.v-enter-active,
-.v-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.v-enter-from,
-.v-leave-to {
-  opacity: 0;
-}
-</style>
