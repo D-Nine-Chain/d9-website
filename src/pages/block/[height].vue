@@ -1,9 +1,13 @@
 <script setup lang="ts">
+import { useBalancesTransfer } from '~/composables/extrinsics/balances'
+
 const route = useRoute('/block/[height]')
 
 const { height } = route.params
 
 const { block } = await getBlock(height) ?? {}
+
+const transfers = useBalancesTransfer(block)
 </script>
 
 <template>
@@ -12,7 +16,7 @@ const { block } = await getBlock(height) ?? {}
       <BlockchainBlockHeader :block="block" />
 
       <div w-limited mt-36>
-        <BlockchainBlockTable :extrinsics="block.extrinsics" />
+        <BlockchainBlockTable :transfers="transfers" />
       </div>
     </template>
 
