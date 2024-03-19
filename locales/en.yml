@@ -9,6 +9,7 @@ intro:
   hi: Hi, {name}!
   whats-your-name: What's your name?
 not-found: Not found
+empty: Empty
 page:
   search:
     hint: Search by Token / Account / Contract / Hash / Block

@@ -3,12 +3,16 @@
 </script>
 
 <template>
-  <div p-8 text-center font-bold>
-    <p>
+  <div px-8 py-16 text-center font-bold>
+    <span text-4xl>
+      😅
+    </span>
+
+    <p mt-8>
       Data Has Been Discarded
     </p>
 
-    <Button mt-8 @click="$router.back()">
+    <Button mt-8 size="small" @click="$router.back()">
       Back
     </Button>
   </div>

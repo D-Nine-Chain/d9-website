@@ -53,10 +53,14 @@ watch(() => props.transfers, (transfers) => {
           <img m-auto size-5 src="/imgs/success-fill.webp" alt="Transaction Success">
         </template>
       </Column>
+
+      <template #empty>
+        <DataTableEmpty />
+      </template>
     </DataTable>
   </section>
 </template>
 
 <style scoped>
 
-</style>GenericExtrinsic, , Vecimport { AnyTuple } from '@polkadot/types/types';
+</style>
