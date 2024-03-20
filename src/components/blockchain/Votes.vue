@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import MeterGroup from 'primevue/metergroup'
 
+const { totalVotes } = useD9VotingRefs()
+
 const value = ref([{ label: '', value: 15, color: 'green', icon: '' }])
 </script>
 
@@ -18,9 +20,10 @@ const value = ref([{ label: '', value: 15, color: 'green', icon: '' }])
         </dt>
         <dd mt-1.4375rem text-1.6875rem font-bold animated animated-flip-in-x>
           <span vertical-mid>
-            45,249,388,709
+            {{ $n(totalVotes) }}
           </span>
-          <span vertical-mid text-1rem style="color: rgba(29, 188, 89, 1)">+161,783</span>
+          <!-- TODO: -->
+          <!-- <span vertical-mid text-1rem style="color: rgba(29, 188, 89, 1)">+161,783</span> -->
         </dd>
       </dl>
 

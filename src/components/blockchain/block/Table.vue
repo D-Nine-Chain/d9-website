@@ -69,3 +69,4 @@ const props = defineProps<{
 <style scoped>
 
 </style>
+~/composables/d9-network/extrinsics/balances

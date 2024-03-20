@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useD9NetworkWacher } from '~/composables/d9-network'
+
 useHead({
   title: 'D9 Network',
   meta: [

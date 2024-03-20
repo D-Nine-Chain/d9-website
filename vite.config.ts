@@ -53,6 +53,7 @@ export default defineConfig({
       dts: 'src/auto-imports.d.ts',
       dirs: [
         'src/composables',
+        'src/composables/d9-network',
         'src/stores',
       ],
       vueTemplate: true,

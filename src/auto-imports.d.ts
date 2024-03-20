@@ -11,7 +11,7 @@ declare global {
   const asyncComputed: typeof import('@vueuse/core')['asyncComputed']
   const autoResetRef: typeof import('@vueuse/core')['autoResetRef']
   const blockHeaders: typeof import('./composables/headers')['blockHeaders']
-  const blocks: typeof import('./composables/d9-network')['blocks']
+  const blocks: typeof import('./composables/d9-network/index')['blocks']
   const computed: typeof import('vue')['computed']
   const computedAsync: typeof import('@vueuse/core')['computedAsync']
   const computedEager: typeof import('@vueuse/core')['computedEager']
@@ -80,7 +80,7 @@ declare global {
   const onUnmounted: typeof import('vue')['onUnmounted']
   const onUpdated: typeof import('vue')['onUpdated']
   const pausableWatch: typeof import('@vueuse/core')['pausableWatch']
-  const paused: typeof import('./composables/d9-network')['paused']
+  const paused: typeof import('./composables/d9-network/index')['paused']
   const preferredDark: typeof import('./composables/dark')['preferredDark']
   const provide: typeof import('vue')['provide']
   const provideLocal: typeof import('@vueuse/core')['provideLocal']
@@ -101,6 +101,7 @@ declare global {
   const resolveComponent: typeof import('vue')['resolveComponent']
   const resolveRef: typeof import('@vueuse/core')['resolveRef']
   const resolveUnref: typeof import('@vueuse/core')['resolveUnref']
+  const rtTotalVotes: typeof import('./composables/d9-network/vote')['rtTotalVotes']
   const shallowReactive: typeof import('vue')['shallowReactive']
   const shallowReadonly: typeof import('vue')['shallowReadonly']
   const shallowRef: typeof import('vue')['shallowRef']
@@ -169,9 +170,11 @@ declare global {
   const useD9Network: typeof import('./stores/d9-network')['useD9Network']
   const useD9NetworkRefs: typeof import('./stores/d9-network')['useD9NetworkRefs']
   const useD9NetworkStore: typeof import('./stores/d9-network')['useD9NetworkStore']
-  const useD9NetworkWacher: typeof import('./composables/d9-network')['useD9NetworkWacher']
+  const useD9NetworkWacher: typeof import('./composables/d9-network/index')['useD9NetworkWacher']
   const useD9TokenAmount: typeof import('./composables/token')['useD9TokenAmount']
   const useD9TokenAmountBN: typeof import('./composables/token')['useD9TokenAmountBN']
+  const useD9VotingRefs: typeof import('./composables/d9-network/vote')['useD9VotingRefs']
+  const useD9VotingStore: typeof import('./composables/d9-network/vote')['useD9VotingStore']
   const useDark: typeof import('@vueuse/core')['useDark']
   const useDateFormat: typeof import('@vueuse/core')['useDateFormat']
   const useDebounce: typeof import('@vueuse/core')['useDebounce']
@@ -252,6 +255,7 @@ declare global {
   const usePreferredReducedMotion: typeof import('@vueuse/core')['usePreferredReducedMotion']
   const usePrevious: typeof import('@vueuse/core')['usePrevious']
   const useRafFn: typeof import('@vueuse/core')['useRafFn']
+  const useRealtimeTotalVotes: typeof import('./composables/d9-network/vote')['useRealtimeTotalVotes']
   const useRefHistory: typeof import('@vueuse/core')['useRefHistory']
   const useResizeObserver: typeof import('@vueuse/core')['useResizeObserver']
   const useRoute: typeof import('vue-router/auto')['useRoute']
@@ -340,7 +344,7 @@ declare module 'vue' {
     readonly api: UnwrapRef<typeof import('./composables/d9-api')['api']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
-    readonly blocks: UnwrapRef<typeof import('./composables/d9-network')['blocks']>
+    readonly blocks: UnwrapRef<typeof import('./composables/d9-network/index')['blocks']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly computedAsync: UnwrapRef<typeof import('@vueuse/core')['computedAsync']>
     readonly computedEager: UnwrapRef<typeof import('@vueuse/core')['computedEager']>
@@ -401,7 +405,7 @@ declare module 'vue' {
     readonly onUnmounted: UnwrapRef<typeof import('vue')['onUnmounted']>
     readonly onUpdated: UnwrapRef<typeof import('vue')['onUpdated']>
     readonly pausableWatch: UnwrapRef<typeof import('@vueuse/core')['pausableWatch']>
-    readonly paused: UnwrapRef<typeof import('./composables/d9-network')['paused']>
+    readonly paused: UnwrapRef<typeof import('./composables/d9-network/index')['paused']>
     readonly provide: UnwrapRef<typeof import('vue')['provide']>
     readonly provideLocal: UnwrapRef<typeof import('@vueuse/core')['provideLocal']>
     readonly reactify: UnwrapRef<typeof import('@vueuse/core')['reactify']>
@@ -482,8 +486,10 @@ declare module 'vue' {
     readonly useCurrentElement: UnwrapRef<typeof import('@vueuse/core')['useCurrentElement']>
     readonly useCycleList: UnwrapRef<typeof import('@vueuse/core')['useCycleList']>
     readonly useD9Api: UnwrapRef<typeof import('./composables/d9-api')['useD9Api']>
-    readonly useD9NetworkWacher: UnwrapRef<typeof import('./composables/d9-network')['useD9NetworkWacher']>
+    readonly useD9NetworkWacher: UnwrapRef<typeof import('./composables/d9-network/index')['useD9NetworkWacher']>
     readonly useD9TokenAmount: UnwrapRef<typeof import('./composables/token')['useD9TokenAmount']>
+    readonly useD9VotingRefs: UnwrapRef<typeof import('./composables/d9-network/vote')['useD9VotingRefs']>
+    readonly useD9VotingStore: UnwrapRef<typeof import('./composables/d9-network/vote')['useD9VotingStore']>
     readonly useDark: UnwrapRef<typeof import('@vueuse/core')['useDark']>
     readonly useDateFormat: UnwrapRef<typeof import('@vueuse/core')['useDateFormat']>
     readonly useDebounce: UnwrapRef<typeof import('@vueuse/core')['useDebounce']>
@@ -642,7 +648,7 @@ declare module '@vue/runtime-core' {
     readonly api: UnwrapRef<typeof import('./composables/d9-api')['api']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
-    readonly blocks: UnwrapRef<typeof import('./composables/d9-network')['blocks']>
+    readonly blocks: UnwrapRef<typeof import('./composables/d9-network/index')['blocks']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly computedAsync: UnwrapRef<typeof import('@vueuse/core')['computedAsync']>
     readonly computedEager: UnwrapRef<typeof import('@vueuse/core')['computedEager']>
@@ -703,7 +709,7 @@ declare module '@vue/runtime-core' {
     readonly onUnmounted: UnwrapRef<typeof import('vue')['onUnmounted']>
     readonly onUpdated: UnwrapRef<typeof import('vue')['onUpdated']>
     readonly pausableWatch: UnwrapRef<typeof import('@vueuse/core')['pausableWatch']>
-    readonly paused: UnwrapRef<typeof import('./composables/d9-network')['paused']>
+    readonly paused: UnwrapRef<typeof import('./composables/d9-network/index')['paused']>
     readonly provide: UnwrapRef<typeof import('vue')['provide']>
     readonly provideLocal: UnwrapRef<typeof import('@vueuse/core')['provideLocal']>
     readonly reactify: UnwrapRef<typeof import('@vueuse/core')['reactify']>
@@ -784,8 +790,10 @@ declare module '@vue/runtime-core' {
     readonly useCurrentElement: UnwrapRef<typeof import('@vueuse/core')['useCurrentElement']>
     readonly useCycleList: UnwrapRef<typeof import('@vueuse/core')['useCycleList']>
     readonly useD9Api: UnwrapRef<typeof import('./composables/d9-api')['useD9Api']>
-    readonly useD9NetworkWacher: UnwrapRef<typeof import('./composables/d9-network')['useD9NetworkWacher']>
+    readonly useD9NetworkWacher: UnwrapRef<typeof import('./composables/d9-network/index')['useD9NetworkWacher']>
     readonly useD9TokenAmount: UnwrapRef<typeof import('./composables/token')['useD9TokenAmount']>
+    readonly useD9VotingRefs: UnwrapRef<typeof import('./composables/d9-network/vote')['useD9VotingRefs']>
+    readonly useD9VotingStore: UnwrapRef<typeof import('./composables/d9-network/vote')['useD9VotingStore']>
     readonly useDark: UnwrapRef<typeof import('@vueuse/core')['useDark']>
     readonly useDateFormat: UnwrapRef<typeof import('@vueuse/core')['useDateFormat']>
     readonly useDebounce: UnwrapRef<typeof import('@vueuse/core')['useDebounce']>

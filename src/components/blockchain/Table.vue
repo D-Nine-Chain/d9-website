@@ -1,27 +1,26 @@
 <script setup lang="ts">
-const products = [{
-  name: '1',
-  ranking: '2',
-  votes: '3',
-  percentage: '4',
-  productivity: '4',
-  RD: '4',
-  PAR: '4',
-  myVotes: '4',
-}]
+const { candidates } = useD9VotingRefs()
 </script>
 
 <template>
   <section>
-    <DataTable :value="products" :table-style="{ 'min-width': '60rem' }">
+    <DataTable :value="candidates" :table-style="{ 'min-width': '60rem' }">
       <Column field="name" :header="$t('page.blockchain.blocks-table.col1')" />
-      <Column field="ranking" :header="$t('page.blockchain.blocks-table.col2')" />
+      <Column :header="$t('page.blockchain.blocks-table.col2')">
+        <template #body="{ index }">
+          {{ index + 1 }}
+        </template>
+      </Column>
       <Column field="votes" :header="$t('page.blockchain.blocks-table.col3')" />
-      <Column field="percentage" :header="$t('page.blockchain.blocks-table.col4')" />
-      <Column field="productivity" :header="$t('page.blockchain.blocks-table.col5')" />
-      <Column field="RD" :header="$t('page.blockchain.blocks-table.col6')" />
-      <Column field="PAR" :header="$t('page.blockchain.blocks-table.col7')" />
-      <Column field="myVotes" :header="$t('page.blockchain.blocks-table.col8')" />
+      <Column :header="$t('page.blockchain.blocks-table.col4')">
+        <template #body="{ data: { sharingPercent } }">
+          {{ $n(sharingPercent / 100, { style: 'percent' }) }}
+        </template>
+      </Column>
+      <!-- <Column field="productivity" :header="$t('page.blockchain.blocks-table.col5')" /> -->
+      <!-- <Column field="RD" :header="$t('page.blockchain.blocks-table.col6')" /> -->
+      <!-- <Column field="PAR" :header="$t('page.blockchain.blocks-table.col7')" /> -->
+      <!-- <Column field="myVotes" :header="$t('page.blockchain.blocks-table.col8')" /> -->
     </DataTable>
   </section>
 </template>

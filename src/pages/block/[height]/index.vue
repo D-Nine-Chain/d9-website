@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // import { useToast } from 'primevue/usetoast'
-import { useBalancesTransferEvents } from '~/composables/extrinsics/balances'
+import { useBalancesTransferEvents } from '~/composables/d9-network/extrinsics/balances'
 
 // const toast = useToast()
 const route = useRoute('/block/[height]/')
@@ -33,4 +33,4 @@ watch(error, (err) => {
 
 <style scoped>
 
-</style>
+</style>~/composables/d9-network/extrinsics/balances

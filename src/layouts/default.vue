@@ -1,4 +1,6 @@
 <script lang=ts setup>
+import { paused } from '~/composables/d9-network'
+
 paused.value = false
 const loaded = computed(() => !!api.value)
 </script>

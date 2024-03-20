@@ -1,4 +1,5 @@
 import type { Header } from '@polkadot/types/interfaces'
+import { useRealtimeTotalVotes } from './vote'
 import type { WrappedBlock } from '~/types'
 
 export const blocks = shallowReactive<WrappedBlock[]>([])
