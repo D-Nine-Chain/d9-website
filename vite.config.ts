@@ -102,6 +102,10 @@ export default defineConfig({
   // ssg for main app
   ssgOptions: {
     script: 'async',
+    includedRoutes(paths, _routes) {
+      console.info(paths)
+      return paths.filter(i => i === '/')
+    },
     formatting: 'minify',
     crittersOptions: {
       reduceInlineStyles: false,
@@ -113,6 +117,6 @@ export default defineConfig({
 
   ssr: {
     // TODO: workaround until they support native ESM
-    noExternal: ['workbox-window', /vue-i18n/, 'primevue'],
+    noExternal: ['workbox-window', /vue-i18n/, 'primevue', 'gsap'],
   },
 } as UserConfig & { test: InlineConfig })

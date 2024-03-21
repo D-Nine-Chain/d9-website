@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { isClient } from '@vueuse/core'
 import { useD9NetworkWacher } from '~/composables/d9-network'
 
 useHead({
@@ -23,8 +24,10 @@ useHead({
 })
 
 // useWalletStore()
-useD9Api()
-useD9NetworkWacher()
+if (isClient) {
+  useD9Api()
+  useD9NetworkWacher()
+}
 
 const { y } = useWindowScroll()
 const navOffsetY = computed(() => `${y.value > 60 ? 60 : 0}px`)
