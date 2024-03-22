@@ -3,7 +3,7 @@ import { formatDistanceStrict } from 'date-fns'
 
 const items = asyncComputed(() => Promise.all(blocks.slice(0, 4).map(async block => ({
   height: block.header.number,
-  reward: 0,
+  reward: 0.25,
   hash: block.hash.toHex(),
   time: (await block.api.query.timestamp.now()).toNumber(),
 }))), [])

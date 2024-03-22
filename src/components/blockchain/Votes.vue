@@ -3,7 +3,9 @@ import MeterGroup from 'primevue/metergroup'
 
 const { totalVotes } = useD9VotingRefs()
 
-const value = ref([{ label: '', value: 15, color: 'green', icon: '' }])
+const { timeLeftFormatted, remainingPercentage } = useD9SessionRefs()
+
+const value = computed(() => [{ label: '', value: remainingPercentage.value * 100, color: 'green', icon: '' }])
 </script>
 
 <template>
@@ -33,8 +35,8 @@ const value = ref([{ label: '', value: 15, color: 'green', icon: '' }])
             {{ $t('page.blockchain.votes.next-round') }}
           </span>
 
-          <span text-3.375rem font-ds-digii md:ml-1.875rem sm:vertical-mid>
-            00:00:09
+          <span inline-block text-3.375rem font-ds-digii md:ml-1.875rem sm:vertical-mid style="width: 8ch">
+            {{ timeLeftFormatted }}
           </span>
         </dt>
 

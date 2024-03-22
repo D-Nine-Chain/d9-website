@@ -2,7 +2,7 @@
 import type { Extrinsic } from '@polkadot/types/interfaces'
 import { formatDistanceToNowStrict } from 'date-fns'
 import type { UnwrapRef } from 'vue'
-import type { useBalancesTransferEvents } from '~/composables/extrinsics/balances'
+import type { useBalancesTransferEvents } from '~/composables/d9-network/extrinsics/balances'
 import { truncate, truncateAddress } from '~/utils'
 
 const props = defineProps<{

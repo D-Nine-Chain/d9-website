@@ -18,15 +18,23 @@ const routes: { path: keyof RouteNamedMap, name: string }[] = [{
   name: 'Wallet',
 }]
 const { dark } = toRefs(props)
+
+const { y } = useWindowScroll()
 </script>
 
 <template>
   <nav
-    class="top-[var(--nav-translate-y)] h-[var(--nav-height)]"
-    :class="dark ? ['dark-mode text-black'] : ['text-white bg-[rgba(1,21,63,0.3)] backdrop-blur-xl']"
-    sticky z-100 col items-stretch justify-end transition-top
+    class="sticky top-0 z-100 h-[var(--nav-height)] col items-stretch justify-end transition-all"
+    :class="[
+      ...(y > 50
+        ? [dark ? 'bg-[rgba(255,255,255,0.91)] shadow-sm' : '']
+        : []),
+      ...(dark
+        ? ['dark-mode text-black']
+        : ['text-white !bg-[rgba(1,21,63,0.3)] backdrop-blur-xl']),
+    ]"
   >
-    <div w-limited mb-10px h-42px w-full row items-center>
+    <div w-limited mb-10px h-42px w-full row items-center class="mt-[var(--nav-translate-y)]">
       <img v-if="dark" src="/imgs/dark-logo.webp" alt="D9 Network Logo" h-full translate-y--1 lt-md:h-38px>
       <img v-else src="/imgs/light-logo.webp" alt="D9 Network Logo" h-full translate-y--1 lt-md:h-38px>
 

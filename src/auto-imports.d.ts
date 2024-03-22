@@ -152,6 +152,8 @@ declare global {
   const useCycleList: typeof import('@vueuse/core')['useCycleList']
   const useD9Api: typeof import('./composables/d9-api')['useD9Api']
   const useD9NetworkWacher: typeof import('./composables/d9-network/index')['useD9NetworkWacher']
+  const useD9SessionRefs: typeof import('./composables/d9-network/session')['useD9SessionRefs']
+  const useD9SessionStore: typeof import('./composables/d9-network/session')['useD9SessionStore']
   const useD9TokenAmount: typeof import('./composables/token')['useD9TokenAmount']
   const useD9VotingRefs: typeof import('./composables/d9-network/vote')['useD9VotingRefs']
   const useD9VotingStore: typeof import('./composables/d9-network/vote')['useD9VotingStore']
@@ -461,8 +463,8 @@ declare module 'vue' {
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
     readonly useCurrentElement: UnwrapRef<typeof import('@vueuse/core')['useCurrentElement']>
     readonly useCycleList: UnwrapRef<typeof import('@vueuse/core')['useCycleList']>
-    readonly useD9Api: UnwrapRef<typeof import('./composables/d9-api')['useD9Api']>
-    readonly useD9NetworkWacher: UnwrapRef<typeof import('./composables/d9-network/index')['useD9NetworkWacher']>
+    readonly useD9SessionRefs: UnwrapRef<typeof import('./composables/d9-network/session')['useD9SessionRefs']>
+    readonly useD9SessionStore: UnwrapRef<typeof import('./composables/d9-network/session')['useD9SessionStore']>
     readonly useD9TokenAmount: UnwrapRef<typeof import('./composables/token')['useD9TokenAmount']>
     readonly useD9VotingRefs: UnwrapRef<typeof import('./composables/d9-network/vote')['useD9VotingRefs']>
     readonly useD9VotingStore: UnwrapRef<typeof import('./composables/d9-network/vote')['useD9VotingStore']>
@@ -765,8 +767,8 @@ declare module '@vue/runtime-core' {
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
     readonly useCurrentElement: UnwrapRef<typeof import('@vueuse/core')['useCurrentElement']>
     readonly useCycleList: UnwrapRef<typeof import('@vueuse/core')['useCycleList']>
-    readonly useD9Api: UnwrapRef<typeof import('./composables/d9-api')['useD9Api']>
-    readonly useD9NetworkWacher: UnwrapRef<typeof import('./composables/d9-network/index')['useD9NetworkWacher']>
+    readonly useD9SessionRefs: UnwrapRef<typeof import('./composables/d9-network/session')['useD9SessionRefs']>
+    readonly useD9SessionStore: UnwrapRef<typeof import('./composables/d9-network/session')['useD9SessionStore']>
     readonly useD9TokenAmount: UnwrapRef<typeof import('./composables/token')['useD9TokenAmount']>
     readonly useD9VotingRefs: UnwrapRef<typeof import('./composables/d9-network/vote')['useD9VotingRefs']>
     readonly useD9VotingStore: UnwrapRef<typeof import('./composables/d9-network/vote')['useD9VotingStore']>
