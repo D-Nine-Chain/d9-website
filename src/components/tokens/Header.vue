@@ -15,7 +15,7 @@
     <div mt-18 row>
       <TokensHeaderOverview flex-grow />
 
-      <TokensHeaderBasicInfo ml-6 flex-grow />
+      <!-- <TokensHeaderBasicInfo ml-6 flex-grow /> -->
 
       <TokensHeaderMore ml-6 flex-grow />
     </div>

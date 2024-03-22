@@ -32,7 +32,7 @@ watchEffect(() => {
         </dt>
       </div>
 
-      <div>
+      <div class="!hidden">
         <dd>
           Circulating Supply:
         </dd>
@@ -41,7 +41,7 @@ watchEffect(() => {
         </dt>
       </div>
 
-      <div>
+      <div class="!hidden">
         <dd>
           Total Market Cap:
         </dd>
