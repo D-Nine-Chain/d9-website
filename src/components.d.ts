@@ -7,6 +7,8 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    BlockchainBlockEventRecordHeader: typeof import('./components/blockchain/block/event-record/Header.vue')['default']
+    BlockchainBlockEventRecordOverview: typeof import('./components/blockchain/block/event-record/Overview.vue')['default']
     BlockchainBlockHeader: typeof import('./components/blockchain/block/Header.vue')['default']
     BlockchainBlockTable: typeof import('./components/blockchain/block/Table.vue')['default']
     BlockchainBlockTrxHeader: typeof import('./components/blockchain/block/trx/Header.vue')['default']

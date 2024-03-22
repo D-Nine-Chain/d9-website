@@ -1,11 +1,16 @@
 <script setup lang="ts">
 import BigNumber from 'bignumber.js'
 
-const { state: totalIssuance } = useAsyncState(async () => await api.value?.query.balances.totalIssuance().then(result => new BigNumber(result.toHex())), new BigNumber(0))
+const { state: totalIssuance, execute } = useAsyncState(async () => await api.value?.query.balances.totalIssuance().then(result => new BigNumber(result.toHex())), new BigNumber(0))
 const totalIssuanceBN = useD9TokenAmount(totalIssuance)
 const { n } = useI18n()
 
 const totalIssuanceFormatted = computed(() => n(totalIssuanceBN.value.toNumber(), { maximumFractionDigits: 0 }))
+
+watchEffect(() => {
+  toValue(api)
+  execute()
+})
 </script>
 
 <template>

@@ -1,19 +1,18 @@
 <script setup lang="ts">
-import type { GenericExtrinsic } from '@polkadot/types'
-import type { Block } from '@polkadot/types/interfaces'
-import type { AnyTuple } from '@polkadot/types/types'
+import type { Block, EventRecord } from '@polkadot/types/interfaces'
 import { format, formatDistance } from 'date-fns'
 
 const props = defineProps<{
   block: Block
-  extrinsic: GenericExtrinsic<AnyTuple>
+  record: EventRecord
 }>()
 
-const { extrinsic } = toRefs(props)
+const { record } = toRefs(props)
 
 const { state: block } = useBlock(props.block.header.number)
 const timestamp = useBlockTimestamp(block)
-const { state: fee } = useNetworkFee(block, computed(() => extrinsic.value.hash))
+const { state: fee } = useNetworkFeeByEventRecord(block, computed(() => record.value.hash))
+const formatFee = useFormatD9TokenAmount(computed(() => fee.value?.actualFee))
 </script>
 
 <template>
@@ -31,7 +30,7 @@ const { state: fee } = useNetworkFee(block, computed(() => extrinsic.value.hash)
             Hash:
           </dt>
           <dd>
-            {{ extrinsic.hash }}
+            {{ record.hash }}
           </dd>
         </div>
 
@@ -52,7 +51,7 @@ const { state: fee } = useNetworkFee(block, computed(() => extrinsic.value.hash)
             <span class="text-#39C068" font-bold>
               CONFIRMED
             </span>
-            <span ml-1rem>
+            <span ml-1rem hidden>
               Confirmed by over 200 blocks
             </span>
           </dd>
@@ -63,13 +62,14 @@ const { state: fee } = useNetworkFee(block, computed(() => extrinsic.value.hash)
             Confirmed SRs:
           </dt>
           <dd>
-            <span font-bold>
+            <!-- <span font-bold>
               19
             </span>
             <span ml-1rem>
               Smart Consensus
               Valkyrie lnvestments
-            </span>
+            </span> -->
+            -
           </dd>
         </div>
 
@@ -104,7 +104,7 @@ const { state: fee } = useNetworkFee(block, computed(() => extrinsic.value.hash)
             Resources Consumed & Fee:
           </dt>
           <dd font-bold>
-            {{ fee?.actualFee?.toBigInt() }} D9
+            {{ formatFee }} D9
           </dd>
         </div>
       </dl>

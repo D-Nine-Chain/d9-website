@@ -1,15 +1,9 @@
 <script setup lang="ts">
-// import { useToast } from 'primevue/usetoast'
-import { useBalancesTransferEvents } from '~/composables/d9-network/extrinsics/balances'
-
-// const toast = useToast()
 const route = useRoute('/block/[height]/')
 
-const { height } = route.params
+const height = computed(() => route.params.height)
 
 const { state: block, error } = await useBlock(height)
-
-const transfers = useBalancesTransferEvents(block)
 
 watch(error, (err) => {
   // err && toast.add({ severity: 'error', summary: 'Error', detail: err?.toString(), life: 3500 })
@@ -20,10 +14,10 @@ watch(error, (err) => {
 <template>
   <div pb-16>
     <template v-if="block">
-      <BlockchainBlockHeader :block="block" />
+      <BlockchainBlockHeader :block />
 
       <div w-limited mt-36>
-        <BlockchainBlockTable :transfers="transfers" />
+        <BlockchainBlockTable :block />
       </div>
     </template>
 

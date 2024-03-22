@@ -150,8 +150,6 @@ declare global {
   const useCssVars: typeof import('vue')['useCssVars']
   const useCurrentElement: typeof import('@vueuse/core')['useCurrentElement']
   const useCycleList: typeof import('@vueuse/core')['useCycleList']
-  const useD9Api: typeof import('./composables/d9-api')['useD9Api']
-  const useD9NetworkWacher: typeof import('./composables/d9-network/index')['useD9NetworkWacher']
   const useD9SessionRefs: typeof import('./composables/d9-network/session')['useD9SessionRefs']
   const useD9SessionStore: typeof import('./composables/d9-network/session')['useD9SessionStore']
   const useD9TokenAmount: typeof import('./composables/token')['useD9TokenAmount']
@@ -176,10 +174,14 @@ declare global {
   const useElementSize: typeof import('@vueuse/core')['useElementSize']
   const useElementVisibility: typeof import('@vueuse/core')['useElementVisibility']
   const useEventBus: typeof import('@vueuse/core')['useEventBus']
+  const useEventFromApiByHash: typeof import('./composables/utils')['useEventFromApiByHash']
   const useEventListener: typeof import('@vueuse/core')['useEventListener']
+  const useEventRecord: typeof import('./composables/utils')['useEventRecord']
   const useEventSource: typeof import('@vueuse/core')['useEventSource']
   const useEventsFromApi: typeof import('./composables/utils')['useEventsFromApi']
   const useExtrinsic: typeof import('./composables/utils')['useExtrinsic']
+  const useExtrinsicByEvent: typeof import('./composables/utils')['useExtrinsicByEvent']
+  const useExtrinsicByEventRecord: typeof import('./composables/utils')['useExtrinsicByEventRecord']
   const useEyeDropper: typeof import('@vueuse/core')['useEyeDropper']
   const useFavicon: typeof import('@vueuse/core')['useFavicon']
   const useFetch: typeof import('@vueuse/core')['useFetch']
@@ -218,6 +220,8 @@ declare global {
   const useNavigatorLanguage: typeof import('@vueuse/core')['useNavigatorLanguage']
   const useNetwork: typeof import('@vueuse/core')['useNetwork']
   const useNetworkFee: typeof import('./composables/utils')['useNetworkFee']
+  const useNetworkFeeByEvent: typeof import('./composables/utils')['useNetworkFeeByEvent']
+  const useNetworkFeeByEventRecord: typeof import('./composables/utils')['useNetworkFeeByEventRecord']
   const useNow: typeof import('@vueuse/core')['useNow']
   const useObjectUrl: typeof import('@vueuse/core')['useObjectUrl']
   const useOffsetPagination: typeof import('@vueuse/core')['useOffsetPagination']
@@ -487,10 +491,13 @@ declare module 'vue' {
     readonly useElementSize: UnwrapRef<typeof import('@vueuse/core')['useElementSize']>
     readonly useElementVisibility: UnwrapRef<typeof import('@vueuse/core')['useElementVisibility']>
     readonly useEventBus: UnwrapRef<typeof import('@vueuse/core')['useEventBus']>
+    readonly useEventFromApiByHash: UnwrapRef<typeof import('./composables/utils')['useEventFromApiByHash']>
     readonly useEventListener: UnwrapRef<typeof import('@vueuse/core')['useEventListener']>
+    readonly useEventRecord: UnwrapRef<typeof import('./composables/utils')['useEventRecord']>
     readonly useEventSource: UnwrapRef<typeof import('@vueuse/core')['useEventSource']>
     readonly useEventsFromApi: UnwrapRef<typeof import('./composables/utils')['useEventsFromApi']>
     readonly useExtrinsic: UnwrapRef<typeof import('./composables/utils')['useExtrinsic']>
+    readonly useExtrinsicByEventRecord: UnwrapRef<typeof import('./composables/utils')['useExtrinsicByEventRecord']>
     readonly useEyeDropper: UnwrapRef<typeof import('@vueuse/core')['useEyeDropper']>
     readonly useFavicon: UnwrapRef<typeof import('@vueuse/core')['useFavicon']>
     readonly useFetch: UnwrapRef<typeof import('@vueuse/core')['useFetch']>
@@ -529,6 +536,7 @@ declare module 'vue' {
     readonly useNavigatorLanguage: UnwrapRef<typeof import('@vueuse/core')['useNavigatorLanguage']>
     readonly useNetwork: UnwrapRef<typeof import('@vueuse/core')['useNetwork']>
     readonly useNetworkFee: UnwrapRef<typeof import('./composables/utils')['useNetworkFee']>
+    readonly useNetworkFeeByEventRecord: UnwrapRef<typeof import('./composables/utils')['useNetworkFeeByEventRecord']>
     readonly useNow: UnwrapRef<typeof import('@vueuse/core')['useNow']>
     readonly useObjectUrl: UnwrapRef<typeof import('@vueuse/core')['useObjectUrl']>
     readonly useOffsetPagination: UnwrapRef<typeof import('@vueuse/core')['useOffsetPagination']>
@@ -791,10 +799,13 @@ declare module '@vue/runtime-core' {
     readonly useElementSize: UnwrapRef<typeof import('@vueuse/core')['useElementSize']>
     readonly useElementVisibility: UnwrapRef<typeof import('@vueuse/core')['useElementVisibility']>
     readonly useEventBus: UnwrapRef<typeof import('@vueuse/core')['useEventBus']>
+    readonly useEventFromApiByHash: UnwrapRef<typeof import('./composables/utils')['useEventFromApiByHash']>
     readonly useEventListener: UnwrapRef<typeof import('@vueuse/core')['useEventListener']>
+    readonly useEventRecord: UnwrapRef<typeof import('./composables/utils')['useEventRecord']>
     readonly useEventSource: UnwrapRef<typeof import('@vueuse/core')['useEventSource']>
     readonly useEventsFromApi: UnwrapRef<typeof import('./composables/utils')['useEventsFromApi']>
     readonly useExtrinsic: UnwrapRef<typeof import('./composables/utils')['useExtrinsic']>
+    readonly useExtrinsicByEventRecord: UnwrapRef<typeof import('./composables/utils')['useExtrinsicByEventRecord']>
     readonly useEyeDropper: UnwrapRef<typeof import('@vueuse/core')['useEyeDropper']>
     readonly useFavicon: UnwrapRef<typeof import('@vueuse/core')['useFavicon']>
     readonly useFetch: UnwrapRef<typeof import('@vueuse/core')['useFetch']>
@@ -833,6 +844,7 @@ declare module '@vue/runtime-core' {
     readonly useNavigatorLanguage: UnwrapRef<typeof import('@vueuse/core')['useNavigatorLanguage']>
     readonly useNetwork: UnwrapRef<typeof import('@vueuse/core')['useNetwork']>
     readonly useNetworkFee: UnwrapRef<typeof import('./composables/utils')['useNetworkFee']>
+    readonly useNetworkFeeByEventRecord: UnwrapRef<typeof import('./composables/utils')['useNetworkFeeByEventRecord']>
     readonly useNow: UnwrapRef<typeof import('@vueuse/core')['useNow']>
     readonly useObjectUrl: UnwrapRef<typeof import('@vueuse/core')['useObjectUrl']>
     readonly useOffsetPagination: UnwrapRef<typeof import('@vueuse/core')['useOffsetPagination']>

@@ -1,9 +1,32 @@
 import type { ApiDecoration } from '@polkadot/api/types'
 import type { Compact, U64 } from '@polkadot/types'
 import type { Block, BlockNumber, CodeHash } from '@polkadot/types/interfaces'
+import type { IU8a } from '@polkadot/types/types'
 import type { MaybeRefOrGetter } from '@vueuse/core'
 import type { WrappedBlock } from '~/types'
 import { getBlockByHeight, getExtrinsicFromBlock } from '~/utils/block'
+
+/**
+ * Get network fee from event
+ * extrinsic -> transaction fee
+ */
+export function useNetworkFeeByEventRecord(block: MaybeRefOrGetter<WrappedBlock | undefined>, recordHash: MaybeRefOrGetter<IU8a | string | undefined>) {
+  const extrinsic = useExtrinsicByEventRecord(block, recordHash)
+  const networkFee = useNetworkFee(block, computed(() => extrinsic.value?.hash))
+  watchEffect(() => {
+    toValue(recordHash)
+    toValue(block)
+    networkFee.execute()
+  })
+  return networkFee
+}
+
+export function useExtrinsicByEventRecord(block: MaybeRefOrGetter<WrappedBlock | undefined>, recordHash: MaybeRefOrGetter<IU8a | string | undefined>) {
+  const event = useEventRecord(block, recordHash)
+  const extrinsicIndex = computed(() => event.value?.phase.isApplyExtrinsic ? event.value?.phase.asApplyExtrinsic.toNumber() : undefined)
+  const extrinsic = computed(() => toValue(block)?.extrinsics.at(toValue(extrinsicIndex)!))
+  return extrinsic
+}
 
 export function useNetworkFee(block: MaybeRefOrGetter<WrappedBlock | undefined>, extrinsicHash: MaybeRefOrGetter<string | CodeHash | undefined>) {
   return useAsyncState(async () => {
@@ -27,7 +50,12 @@ export function useNetworkFee(block: MaybeRefOrGetter<WrappedBlock | undefined>,
 }
 
 export function useBlock(height: MaybeRefOrGetter<string | number | Compact<BlockNumber> | undefined>) {
-  return useAsyncState(() => getBlockByHeight(toValue(height)), undefined)
+  const state = useAsyncState(() => getBlockByHeight(toValue(height)), undefined)
+  watchEffect(() => {
+    toValue(height)
+    state.execute()
+  })
+  return state
 }
 
 export function useExtrinsic(block: MaybeRefOrGetter<WrappedBlock | undefined>, hash: MaybeRefOrGetter<string | undefined>) {
@@ -35,6 +63,15 @@ export function useExtrinsic(block: MaybeRefOrGetter<WrappedBlock | undefined>, 
     return getExtrinsicFromBlock(toValue(block), toValue(hash))
   })
 }
+
+export function useEventRecord(block: MaybeRefOrGetter<WrappedBlock | undefined>, hash: MaybeRefOrGetter<IU8a | string | undefined>) {
+  const event = useEventFromApiByHash(
+    computed(() => toValue(block)?.api),
+    computed(() => toValue(hash)),
+  )
+  return event
+}
+
 export function useBlockTimestamp(block: MaybeRefOrGetter<Block | undefined>) {
   const timestamp = computed(() => {
     if (!toValue(block))
@@ -61,9 +98,18 @@ export function useBlockTimestampFromApi(api: MaybeRefOrGetter<ApiDecoration<'pr
   }, undefined)
 }
 
-export function useEventsFromApi(api: MaybeRefOrGetter<ApiDecoration<'promise'>>) {
+export function useEventsFromApi(api: MaybeRefOrGetter<ApiDecoration<'promise'> | undefined>) {
   return asyncComputed(async () => {
-    const events = await toValue(api).query.system.events()
+    const events = await toValue(api)?.query.system.events()
     return events
   }, undefined)
+}
+
+export function useEventFromApiByHash(api: MaybeRefOrGetter<ApiDecoration<'promise'> | undefined>, hash: MaybeRefOrGetter<IU8a | string | undefined>) {
+  const events = useEventsFromApi(api)
+  const event = computed(() => events.value?.find(event => event.hash.eq(toValue(hash))))
+  // watchEffect(() => {
+  //   console.info('events', toValue(events), 'hash', toValue(hash), 'found', event.value)
+  // })
+  return event
 }

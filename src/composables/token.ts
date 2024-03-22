@@ -1,12 +1,12 @@
-import { UInt } from '@polkadot/types'
 import type { MaybeRefOrGetter } from '@vueuse/core'
 import BigNumber from 'bignumber.js'
 
 export function formatTokenAmount(amount: any, decimals: number) {
   const divisor = new BigNumber(10).pow(decimals)
-  let _amount = amount.toString()
-  if (amount instanceof UInt)
-    _amount = amount.toBigInt().toString()
+  if (!amount || !amount.toString)
+    return new BigNumber(0)
+  const _amount = amount.toString()
+  console.info('format token amount', amount.toString(), decimals, new BigNumber(_amount).dividedBy(divisor).toString())
   return new BigNumber(_amount).dividedBy(divisor)
 }
 

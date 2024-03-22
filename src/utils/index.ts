@@ -8,7 +8,9 @@ const truncateRegex = /^([a-zA-Z0-9]{8})[a-zA-Z0-9]+([a-zA-Z0-9]{5})$/
  * @param address Full address to truncate
  * @returns Truncated address
  */
-export function truncateAddress(address: string | GenericAccountId) {
+export function truncateAddress(address: string | GenericAccountId | undefined) {
+  if (!address)
+    return ''
   const match = (address.toString()).match(truncateRegex)
   if (!match)
     return address.toString()
@@ -16,5 +18,7 @@ export function truncateAddress(address: string | GenericAccountId) {
 }
 
 export function truncate(str: string, left = 8, end = 5) {
+  if (!str)
+    return ''
   return `${str.substring(0, left)}…${str.substring(str.length - end)}`
 }

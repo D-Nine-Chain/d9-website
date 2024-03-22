@@ -1,30 +1,31 @@
 <script setup lang="ts">
-import type { Extrinsic } from '@polkadot/types/interfaces'
 import { formatDistanceToNowStrict } from 'date-fns'
-import type { UnwrapRef } from 'vue'
-import type { useBalancesTransferEvents } from '~/composables/d9-network/extrinsics/balances'
+import { useBalancesTransferEvents } from '~/composables/d9-network/extrinsics/balances'
+import type { WrappedBlock } from '~/types'
 import { truncate, truncateAddress } from '~/utils'
 
 const props = defineProps<{
-  transfers: UnwrapRef<ReturnType<typeof useBalancesTransferEvents>>
+  block: WrappedBlock
 }>()
+
+const { state: transfers, isLoading } = useBalancesTransferEvents(computed(() => props.block))
 </script>
 
 <template>
   <section>
-    <DataTable :value="props.transfers" :table-style="{ 'min-width': '50rem' }">
+    <DataTable :value="transfers ?? []" :loading="isLoading" :table-style="{ 'min-width': '50rem' }">
       <Column field="hash" header="Hash">
-        <template #body="{ data: { extrinsic, header } }">
+        <template #body="{ data: { eventRecordHash, header } }">
           <router-link
             font-bold text-gradient :to="{
-              name: '/block/[height]/trx/[hash]',
+              name: '/block/[height]/event-record/[hash]/',
               params: {
-                hash: (extrinsic as Extrinsic).hash.toHex(),
+                hash: eventRecordHash.toHex(),
                 height: header.number.toNumber(),
               },
             }"
           >
-            {{ truncate((extrinsic as Extrinsic).hash.toHex()) }}
+            {{ truncate(eventRecordHash.toHex()) }}
           </router-link>
         </template>
       </Column>
@@ -61,6 +62,10 @@ const props = defineProps<{
 
       <template #empty>
         <DataTableEmpty />
+      </template>
+
+      <template #loading>
+        <Loading />
       </template>
     </DataTable>
   </section>

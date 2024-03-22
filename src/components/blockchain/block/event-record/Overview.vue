@@ -1,5 +1,21 @@
 <script setup lang="ts">
+import type { EventRecord } from '@polkadot/types/interfaces'
+import { truncateAddress } from '~/utils'
 
+const props = defineProps<{
+  record: EventRecord
+}>()
+
+const info = computed(() => {
+  const event = props.record.event
+  if (api.value?.events.balances.Transfer.is(event)) {
+    const [from, to, amount] = event.data
+    return { from, to, amount }
+  }
+  return {}
+})
+
+const formatAmount = useFormatD9TokenAmount(computed(() => info.value.amount))
 </script>
 
 <template>
@@ -9,7 +25,7 @@
     </h2>
 
     <dl class="details">
-      <div>
+      <div class="!hidden">
         <dt font-bold>
           Owner Address:
         </dt>
@@ -18,7 +34,7 @@
         </dd>
       </div>
 
-      <div>
+      <div class="!hidden">
         <dt>
           Contract Address:
         </dt>
@@ -44,19 +60,19 @@
             From
           </span>
           <span mr-8 font-bold>
-            TNTNgtrpOTDCCwB9Dh17GNc22WzYbF7n
+            {{ truncateAddress(info.from) }}
           </span>
 
           <span>
             to
           </span>
           <span mr-6 font-bold>
-            TCG9cXppUJFBobN9fp98wzHkAsv4r5ut7z
+            {{ truncateAddress(info.to) }}
           </span>
 
           <span font-bold text-gradient>
             <span mr-1>
-              4452.36
+              {{ formatAmount }}
             </span>
             <span>
               D9
@@ -65,7 +81,7 @@
         </dd>
       </div>
 
-      <div>
+      <div class="!hidden">
         <dt>
           Method Calling:
         </dt>
