@@ -27,4 +27,4 @@ watch(error, (err) => {
 
 <style scoped>
 
-</style>~/composables/d9-network/extrinsics/balances
+</style>
