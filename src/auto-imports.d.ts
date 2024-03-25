@@ -287,6 +287,7 @@ declare global {
   const useToggle: typeof import('@vueuse/core')['useToggle']
   const useTokenAmount: typeof import('./composables/token')['useTokenAmount']
   const useTrade24H: typeof import('./composables/indexer/trade24H')['useTrade24H']
+  const useTransfers: typeof import('./composables/indexer/transfers')['useTransfers']
   const useTransition: typeof import('@vueuse/core')['useTransition']
   const useUrlSearchParams: typeof import('@vueuse/core')['useUrlSearchParams']
   const useUserMedia: typeof import('@vueuse/core')['useUserMedia']
@@ -607,6 +608,7 @@ declare module 'vue' {
     readonly useToggle: UnwrapRef<typeof import('@vueuse/core')['useToggle']>
     readonly useTokenAmount: UnwrapRef<typeof import('./composables/token')['useTokenAmount']>
     readonly useTrade24H: UnwrapRef<typeof import('./composables/indexer/trade24H')['useTrade24H']>
+    readonly useTransfers: UnwrapRef<typeof import('./composables/indexer/transfers')['useTransfers']>
     readonly useTransition: UnwrapRef<typeof import('@vueuse/core')['useTransition']>
     readonly useUrlSearchParams: UnwrapRef<typeof import('@vueuse/core')['useUrlSearchParams']>
     readonly useUserMedia: UnwrapRef<typeof import('@vueuse/core')['useUserMedia']>
@@ -920,6 +922,7 @@ declare module '@vue/runtime-core' {
     readonly useToggle: UnwrapRef<typeof import('@vueuse/core')['useToggle']>
     readonly useTokenAmount: UnwrapRef<typeof import('./composables/token')['useTokenAmount']>
     readonly useTrade24H: UnwrapRef<typeof import('./composables/indexer/trade24H')['useTrade24H']>
+    readonly useTransfers: UnwrapRef<typeof import('./composables/indexer/transfers')['useTransfers']>
     readonly useTransition: UnwrapRef<typeof import('@vueuse/core')['useTransition']>
     readonly useUrlSearchParams: UnwrapRef<typeof import('@vueuse/core')['useUrlSearchParams']>
     readonly useUserMedia: UnwrapRef<typeof import('@vueuse/core')['useUserMedia']>

@@ -1,10 +1,14 @@
 <script setup lang="ts">
 import { reserves } from '~/composables/d9-network/contracts/market-maker'
 
+const { result: transfers } = useTransfers({ token: 'D9', limit: 1, offset: 0 })
+
 const { result, loading } = useTrade24H()
 await until(loading).toBe(false)
 
 const trade24H = computed(() => result.value?.trade24H.at(0))
+
+await until(loading).toBe(false)
 </script>
 
 <template>
@@ -29,7 +33,7 @@ const trade24H = computed(() => result.value?.trade24H.at(0))
         </dd>
         <dt>
           <!-- {{ $n(trade24H?.tradeCount24H ?? 0) }} -->
-          -
+          {{ $n(transfers?.transfersConnection.totalCount ?? 0) }}
         </dt>
       </div>
 

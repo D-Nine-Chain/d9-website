@@ -1,5 +1,3 @@
-import { Keyring } from '@polkadot/api'
-import { mnemonicGenerate } from '@polkadot/util-crypto'
 import { ContractPromise } from '@polkadot/api-contract'
 import type { u128 } from '@polkadot/types'
 import BigNumber from 'bignumber.js'
@@ -18,10 +16,8 @@ export async function getLiquidity() {
   if (!api.value)
     return null
   const contract = new ContractPromise(api.value!, Contracts.MARKET_MAKER.abi, Contracts.MARKET_MAKER.address)
-  const keyring = new Keyring({ type: 'sr25519' })
-  const tempAccount = keyring.addFromMnemonic(mnemonicGenerate())
   const { result, output } = await contract.query.getCurrencyReserves(
-    tempAccount.address,
+    Contracts.MARKET_MAKER.address,
     {
       gasLimit: getGasLimits().readLimit,
     },
