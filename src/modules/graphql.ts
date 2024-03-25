@@ -7,7 +7,7 @@ import { createClient } from 'graphql-ws'
 import type { UserModule } from '~/types'
 
 export const install: UserModule = ({ app, isClient }) => {
-  if (isClient)
+  if (!isClient)
     return
   const wsLink = new GraphQLWsLink(createClient({
     url: import.meta.env.VITE_APP_INDEXER_WS!,
