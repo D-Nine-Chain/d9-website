@@ -46,7 +46,7 @@ const { y } = useWindowScroll()
         </li>
       </ul>
 
-      <button class="primary" ml-8 shrink-0 px-5 py-1.5 lg:px-7>
+      <button class="primary" ml-8 hidden shrink-0 px-5 py-1.5 lg:px-7>
         Log in
       </button>
     </div>
