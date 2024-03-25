@@ -3,6 +3,8 @@ import { ApiPromise, WsProvider } from '@polkadot/api'
 import type { Header } from '@polkadot/types/interfaces'
 import type { UserModule, WrappedBlock } from '~/types'
 
+const queueLimit = import.meta.env.VITE_APP_QUEUE_BUFFER
+const blockLimit = import.meta.env.VITE_APP_KEEP_BLOCK
 const queue: Header[] = []
 const endpoint = ref(import.meta.env.VITE_APP_RPC_ENDPOINT as string)
 
@@ -10,8 +12,6 @@ export const install: UserModule = ({ isClient }) => {
   if (!isClient)
     return
   watch(endpoint, async (ep) => {
-    if (!isClient)
-      return
     console.info('endpoint', ep)
     const wsProvider = new WsProvider(ep, 5000)
     const _api = await ApiPromise.create({
@@ -31,23 +31,22 @@ export const install: UserModule = ({ isClient }) => {
   watch(api, async (api, _oldValue, onCleanup) => {
     console.info('d9Api', 'changes', api?.genesisHash.toHex(), 'old one', _oldValue?.genesisHash.toHex())
     if (api) {
+      queue.splice(0, queue.length)
+      blocks.splice(0, blocks.length)
       const unsub = await api.rpc.chain.subscribeNewHeads(async (lastHeader) => {
-        // blockHeaders.unshift(lastHeader)
+        if (queue.find(({ number }) => number.eq(lastHeader.number))) {
+          console.info(lastHeader.number.toString(), 'Already exists so skip')
+          return
+        }
+
         queue.push(lastHeader)
-        queue.length > import.meta.env.VITE_APP_QUEUE_BUFFER && queue.shift()
-        // ;(blockHeaders.length > import.meta.env.VITE_APP_KEEP_BLOCK) && blockHeaders.pop()
+        queue.length > queueLimit && queue.shift()
       })
       onCleanup(() => {
         unsub()
       })
     }
-    if (_oldValue) {
-      if (!api || (api && !_oldValue.genesisHash.eq(api.genesisHash))) {
-        queue.splice(0, queue.length)
-        blocks.splice(0, queue.length)
-      }
-    }
-  }, { immediate: true })
+  }, { immediate: true, deep: false })
 
   async function processQueue() {
     while (true) {
@@ -59,13 +58,19 @@ export const install: UserModule = ({ isClient }) => {
         const header = queue.shift()
         if (!header)
           continue
+
         try {
           const block = (await api.value.rpc.chain.getBlock(header.hash)).block
           const apiAt = (await api.value.at(block.hash))
+
+          if (blocks.find(({ header: { number } }) => number.eq(block.header.number))) {
+            console.info(header.number.toString(), 'Already exists so skip')
+            continue
+          }
           blocks.unshift(Object.assign(block, {
             api: apiAt,
           }) satisfies WrappedBlock)
-          ;(blocks.length > import.meta.env.VITE_APP_KEEP_BLOCK) && blocks.pop()
+          ;(blocks.length > blockLimit) && blocks.pop()
         }
         catch (err) {
           console.error('get block info failed.', err)
@@ -74,7 +79,7 @@ export const install: UserModule = ({ isClient }) => {
     }
   }
 
-  processQueue()
+  processQueue().catch(console.error)
 }
 
 const customRPC = {

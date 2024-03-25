@@ -2,7 +2,7 @@
 import BigNumber from 'bignumber.js'
 
 const { state: totalIssuance, execute } = useAsyncState(async () => await api.value?.query.balances.totalIssuance().then(result => new BigNumber(result.toHex())), new BigNumber(0))
-const totalIssuanceBN = useD9TokenAmount(totalIssuance)
+const totalIssuanceBN = useTokenAmount(totalIssuance, 'D9')
 const { n } = useI18n()
 
 const totalIssuanceFormatted = computed(() => n(totalIssuanceBN.value.toNumber(), { maximumFractionDigits: 0 }))

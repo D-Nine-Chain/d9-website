@@ -6,6 +6,8 @@
 export {}
 declare global {
   const EffectScope: typeof import('vue')['EffectScope']
+  const TokenFormatMap: typeof import('./composables/token')['TokenFormatMap']
+  const _formatTokenAmount: typeof import('./composables/token')['_formatTokenAmount']
   const api: typeof import('./composables/d9-api')['api']
   const asyncComputed: typeof import('@vueuse/core')['asyncComputed']
   const autoResetRef: typeof import('@vueuse/core')['autoResetRef']
@@ -73,6 +75,7 @@ declare global {
   const paused: typeof import('./composables/d9-network/index')['paused']
   const provide: typeof import('vue')['provide']
   const provideLocal: typeof import('@vueuse/core')['provideLocal']
+  const rawBlocks: typeof import('./composables/d9-network/index')['rawBlocks']
   const reactify: typeof import('@vueuse/core')['reactify']
   const reactifyObject: typeof import('@vueuse/core')['reactifyObject']
   const reactive: typeof import('vue')['reactive']
@@ -144,6 +147,7 @@ declare global {
   const useCloned: typeof import('@vueuse/core')['useCloned']
   const useColorMode: typeof import('@vueuse/core')['useColorMode']
   const useConfirmDialog: typeof import('@vueuse/core')['useConfirmDialog']
+  const useContractsCallMessage: typeof import('./composables/utils')['useContractsCallMessage']
   const useCounter: typeof import('@vueuse/core')['useCounter']
   const useCssModule: typeof import('vue')['useCssModule']
   const useCssVar: typeof import('@vueuse/core')['useCssVar']
@@ -190,6 +194,7 @@ declare global {
   const useFocus: typeof import('@vueuse/core')['useFocus']
   const useFocusWithin: typeof import('@vueuse/core')['useFocusWithin']
   const useFormatD9TokenAmount: typeof import('./composables/token')['useFormatD9TokenAmount']
+  const useFormatTokenAmount: typeof import('./composables/token')['useFormatTokenAmount']
   const useFps: typeof import('@vueuse/core')['useFps']
   const useFullscreen: typeof import('@vueuse/core')['useFullscreen']
   const useGamepad: typeof import('@vueuse/core')['useGamepad']
@@ -279,6 +284,7 @@ declare global {
   const useToNumber: typeof import('@vueuse/core')['useToNumber']
   const useToString: typeof import('@vueuse/core')['useToString']
   const useToggle: typeof import('@vueuse/core')['useToggle']
+  const useTokenAmount: typeof import('./composables/token')['useTokenAmount']
   const useTransition: typeof import('@vueuse/core')['useTransition']
   const useUrlSearchParams: typeof import('@vueuse/core')['useUrlSearchParams']
   const useUserMedia: typeof import('@vueuse/core')['useUserMedia']
@@ -323,6 +329,8 @@ declare module 'vue' {
   interface GlobalComponents {}
   interface ComponentCustomProperties {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
+    readonly TokenFormatMap: UnwrapRef<typeof import('./composables/token')['TokenFormatMap']>
+    readonly _formatTokenAmount: UnwrapRef<typeof import('./composables/token')['_formatTokenAmount']>
     readonly api: UnwrapRef<typeof import('./composables/d9-api')['api']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
@@ -390,6 +398,7 @@ declare module 'vue' {
     readonly paused: UnwrapRef<typeof import('./composables/d9-network/index')['paused']>
     readonly provide: UnwrapRef<typeof import('vue')['provide']>
     readonly provideLocal: UnwrapRef<typeof import('@vueuse/core')['provideLocal']>
+    readonly rawBlocks: UnwrapRef<typeof import('./composables/d9-network/index')['rawBlocks']>
     readonly reactify: UnwrapRef<typeof import('@vueuse/core')['reactify']>
     readonly reactifyObject: UnwrapRef<typeof import('@vueuse/core')['reactifyObject']>
     readonly reactive: UnwrapRef<typeof import('vue')['reactive']>
@@ -469,7 +478,6 @@ declare module 'vue' {
     readonly useCycleList: UnwrapRef<typeof import('@vueuse/core')['useCycleList']>
     readonly useD9SessionRefs: UnwrapRef<typeof import('./composables/d9-network/session')['useD9SessionRefs']>
     readonly useD9SessionStore: UnwrapRef<typeof import('./composables/d9-network/session')['useD9SessionStore']>
-    readonly useD9TokenAmount: UnwrapRef<typeof import('./composables/token')['useD9TokenAmount']>
     readonly useD9VotingRefs: UnwrapRef<typeof import('./composables/d9-network/vote')['useD9VotingRefs']>
     readonly useD9VotingStore: UnwrapRef<typeof import('./composables/d9-network/vote')['useD9VotingStore']>
     readonly useDark: UnwrapRef<typeof import('@vueuse/core')['useDark']>
@@ -505,7 +513,7 @@ declare module 'vue' {
     readonly useFileSystemAccess: UnwrapRef<typeof import('@vueuse/core')['useFileSystemAccess']>
     readonly useFocus: UnwrapRef<typeof import('@vueuse/core')['useFocus']>
     readonly useFocusWithin: UnwrapRef<typeof import('@vueuse/core')['useFocusWithin']>
-    readonly useFormatD9TokenAmount: UnwrapRef<typeof import('./composables/token')['useFormatD9TokenAmount']>
+    readonly useFormatTokenAmount: UnwrapRef<typeof import('./composables/token')['useFormatTokenAmount']>
     readonly useFps: UnwrapRef<typeof import('@vueuse/core')['useFps']>
     readonly useFullscreen: UnwrapRef<typeof import('@vueuse/core')['useFullscreen']>
     readonly useGamepad: UnwrapRef<typeof import('@vueuse/core')['useGamepad']>
@@ -594,6 +602,7 @@ declare module 'vue' {
     readonly useToNumber: UnwrapRef<typeof import('@vueuse/core')['useToNumber']>
     readonly useToString: UnwrapRef<typeof import('@vueuse/core')['useToString']>
     readonly useToggle: UnwrapRef<typeof import('@vueuse/core')['useToggle']>
+    readonly useTokenAmount: UnwrapRef<typeof import('./composables/token')['useTokenAmount']>
     readonly useTransition: UnwrapRef<typeof import('@vueuse/core')['useTransition']>
     readonly useUrlSearchParams: UnwrapRef<typeof import('@vueuse/core')['useUrlSearchParams']>
     readonly useUserMedia: UnwrapRef<typeof import('@vueuse/core')['useUserMedia']>
@@ -631,6 +640,8 @@ declare module '@vue/runtime-core' {
   interface GlobalComponents {}
   interface ComponentCustomProperties {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
+    readonly TokenFormatMap: UnwrapRef<typeof import('./composables/token')['TokenFormatMap']>
+    readonly _formatTokenAmount: UnwrapRef<typeof import('./composables/token')['_formatTokenAmount']>
     readonly api: UnwrapRef<typeof import('./composables/d9-api')['api']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
@@ -698,6 +709,7 @@ declare module '@vue/runtime-core' {
     readonly paused: UnwrapRef<typeof import('./composables/d9-network/index')['paused']>
     readonly provide: UnwrapRef<typeof import('vue')['provide']>
     readonly provideLocal: UnwrapRef<typeof import('@vueuse/core')['provideLocal']>
+    readonly rawBlocks: UnwrapRef<typeof import('./composables/d9-network/index')['rawBlocks']>
     readonly reactify: UnwrapRef<typeof import('@vueuse/core')['reactify']>
     readonly reactifyObject: UnwrapRef<typeof import('@vueuse/core')['reactifyObject']>
     readonly reactive: UnwrapRef<typeof import('vue')['reactive']>
@@ -777,7 +789,6 @@ declare module '@vue/runtime-core' {
     readonly useCycleList: UnwrapRef<typeof import('@vueuse/core')['useCycleList']>
     readonly useD9SessionRefs: UnwrapRef<typeof import('./composables/d9-network/session')['useD9SessionRefs']>
     readonly useD9SessionStore: UnwrapRef<typeof import('./composables/d9-network/session')['useD9SessionStore']>
-    readonly useD9TokenAmount: UnwrapRef<typeof import('./composables/token')['useD9TokenAmount']>
     readonly useD9VotingRefs: UnwrapRef<typeof import('./composables/d9-network/vote')['useD9VotingRefs']>
     readonly useD9VotingStore: UnwrapRef<typeof import('./composables/d9-network/vote')['useD9VotingStore']>
     readonly useDark: UnwrapRef<typeof import('@vueuse/core')['useDark']>
@@ -813,7 +824,7 @@ declare module '@vue/runtime-core' {
     readonly useFileSystemAccess: UnwrapRef<typeof import('@vueuse/core')['useFileSystemAccess']>
     readonly useFocus: UnwrapRef<typeof import('@vueuse/core')['useFocus']>
     readonly useFocusWithin: UnwrapRef<typeof import('@vueuse/core')['useFocusWithin']>
-    readonly useFormatD9TokenAmount: UnwrapRef<typeof import('./composables/token')['useFormatD9TokenAmount']>
+    readonly useFormatTokenAmount: UnwrapRef<typeof import('./composables/token')['useFormatTokenAmount']>
     readonly useFps: UnwrapRef<typeof import('@vueuse/core')['useFps']>
     readonly useFullscreen: UnwrapRef<typeof import('@vueuse/core')['useFullscreen']>
     readonly useGamepad: UnwrapRef<typeof import('@vueuse/core')['useGamepad']>
@@ -902,6 +913,7 @@ declare module '@vue/runtime-core' {
     readonly useToNumber: UnwrapRef<typeof import('@vueuse/core')['useToNumber']>
     readonly useToString: UnwrapRef<typeof import('@vueuse/core')['useToString']>
     readonly useToggle: UnwrapRef<typeof import('@vueuse/core')['useToggle']>
+    readonly useTokenAmount: UnwrapRef<typeof import('./composables/token')['useTokenAmount']>
     readonly useTransition: UnwrapRef<typeof import('@vueuse/core')['useTransition']>
     readonly useUrlSearchParams: UnwrapRef<typeof import('@vueuse/core')['useUrlSearchParams']>
     readonly useUserMedia: UnwrapRef<typeof import('@vueuse/core')['useUserMedia']>

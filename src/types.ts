@@ -7,3 +7,5 @@ export type UserModule = (ctx: ViteSSGContext) => void
 export type WrappedBlock = Block & {
   api: ApiDecoration<'promise'>
 }
+
+export type Token = 'D9' | 'USDT'

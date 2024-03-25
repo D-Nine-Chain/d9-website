@@ -7,13 +7,12 @@ import { truncate, truncateAddress } from '~/utils'
 const props = defineProps<{
   block: WrappedBlock
 }>()
-
 const { state: transfers, isLoading } = useBalancesTransferEvents(computed(() => props.block))
 </script>
 
 <template>
   <section>
-    <DataTable :value="transfers ?? []" :loading="isLoading" :table-style="{ 'min-width': '50rem' }">
+    <DataTable :value="transfers ?? []" :loading="isLoading" :table-style="{ 'min-width': '80rem' }">
       <Column field="hash" header="Hash">
         <template #body="{ data: { eventRecordHash, header } }">
           <router-link
@@ -53,7 +52,11 @@ const { state: transfers, isLoading } = useBalancesTransferEvents(computed(() =>
           {{ truncateAddress(to) }}
         </template>
       </Column>
-      <Column field="amount" header="Token" />
+      <Column field="amount" header="Token">
+        <template #body="{ data: { amount, token } }">
+          {{ formatTokenAmount(amount, token) }} {{ token }}
+        </template>
+      </Column>
       <Column field="result" header="Result">
         <template #body>
           <img m-auto size-5 src="/imgs/success-fill.webp" alt="Transaction Success">

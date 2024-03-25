@@ -1,21 +1,42 @@
 <script setup lang="ts">
+import type { u128 } from '@polkadot/types/bundle'
 import type { EventRecord } from '@polkadot/types/interfaces'
+import type { Token, WrappedBlock } from '~/types'
 import { truncateAddress } from '~/utils'
+import { decodeUSDTContractMessage } from '~/utils/block'
 
 const props = defineProps<{
   record: EventRecord
+  block: WrappedBlock
 }>()
 
-const info = computed(() => {
+const extrinsic = useExtrinsicByEventRecord(props.block, props.record.hash)
+
+const info: ComputedRef<{ from: string, to: string, amount: bigint, token: Token } | undefined> = computed(() => {
   const event = props.record.event
   if (api.value?.events.balances.Transfer.is(event)) {
     const [from, to, amount] = event.data
-    return { from, to, amount }
+    return { from: from.toString(), to: to.toString(), amount: amount.toBigInt(), token: 'D9' }
   }
-  return {}
+  else {
+    const decoded = decodeUSDTContractMessage(extrinsic.value)
+    if (decoded) {
+      const [to, value] = decoded.args as [Uint8Array, u128]
+      return {
+        from: extrinsic.value!.signer.toString(),
+        to: to.toString(),
+        amount: value.toBigInt(),
+        token: 'USDT',
+      }
+    }
+  }
+  return undefined
 })
 
-const formatAmount = useFormatD9TokenAmount(computed(() => info.value.amount))
+const formatAmount = useFormatTokenAmount(
+  computed(() => info.value?.amount),
+  computed(() => info.value?.token ?? 'D9'),
+)
 </script>
 
 <template>
@@ -60,14 +81,14 @@ const formatAmount = useFormatD9TokenAmount(computed(() => info.value.amount))
             From
           </span>
           <span mr-8 font-bold>
-            {{ truncateAddress(info.from) }}
+            {{ truncateAddress(info?.from) }}
           </span>
 
           <span>
             to
           </span>
           <span mr-6 font-bold>
-            {{ truncateAddress(info.to) }}
+            {{ truncateAddress(info?.to) }}
           </span>
 
           <span font-bold text-gradient>
@@ -75,7 +96,7 @@ const formatAmount = useFormatD9TokenAmount(computed(() => info.value.amount))
               {{ formatAmount }}
             </span>
             <span>
-              D9
+              {{ info?.token }}
             </span>
           </span>
         </dd>

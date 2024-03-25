@@ -12,7 +12,7 @@ const { record } = toRefs(props)
 const { state: block } = useBlock(props.block.header.number)
 const timestamp = useBlockTimestamp(block)
 const { state: fee } = useNetworkFeeByEventRecord(block, computed(() => record.value.hash))
-const formatFee = useFormatD9TokenAmount(computed(() => fee.value?.actualFee))
+const formatFee = useFormatTokenAmount(computed(() => fee.value?.actualFee), 'D9')
 </script>
 
 <template>

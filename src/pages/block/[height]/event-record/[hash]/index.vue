@@ -17,7 +17,7 @@ await until(record).not.toBeUndefined()
       <BlockchainBlockEventRecordHeader :record :block />
 
       <div w-limited mt-76>
-        <BlockchainBlockEventRecordOverview :record />
+        <BlockchainBlockEventRecordOverview :record :block />
       </div>
     </template>
 

@@ -51,9 +51,11 @@ export function useNetworkFee(block: MaybeRefOrGetter<WrappedBlock | undefined>,
 
 export function useBlock(height: MaybeRefOrGetter<string | number | Compact<BlockNumber> | undefined>) {
   const state = useAsyncState(() => getBlockByHeight(toValue(height)), undefined)
-  watchEffect(() => {
+  watch(() => toValue(height), async (cur, pre) => {
+    if (cur === pre)
+      return
     toValue(height)
-    state.execute()
+    await state.execute().catch(console.warn)
   })
   return state
 }

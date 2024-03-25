@@ -14,6 +14,13 @@ import '@unocss/reset/tailwind-compat.css'
 import './styles/main.scss'
 import 'uno.css'
 
+console.assert(import.meta.env.VITE_APP_CONTRACT_USDT)
+console.assert(import.meta.env.VITE_APP_INDEXER_HTTP)
+console.assert(import.meta.env.VITE_APP_INDEXER_WS)
+console.assert(import.meta.env.VITE_APP_KEEP_BLOCK)
+console.assert(import.meta.env.VITE_APP_QUEUE_BUFFER)
+console.assert(import.meta.env.VITE_APP_RPC_ENDPOINT)
+
 // https://github.com/antfu/vite-ssg
 export const createApp = ViteSSG(
   App,

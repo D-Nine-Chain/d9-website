@@ -55,7 +55,7 @@ const {
           </dt>
           <dd>
             <span font-bold style="color: rgba(57, 192, 104, 1)">CONFIRMED</span>
-            <span ml-1rem text-0.875rem>Confirmed by over 200 blocks</span>
+            <!-- <span ml-1rem text-0.875rem>Confirmed by over 200 blocks</span> -->
           </dd>
         </div>
 
@@ -64,7 +64,8 @@ const {
             Confirmed SRs:
           </dt>
           <dd>
-            <span font-bold>19</span>
+            <!-- <span font-bold>19</span> -->
+            -
           </dd>
         </div>
 
