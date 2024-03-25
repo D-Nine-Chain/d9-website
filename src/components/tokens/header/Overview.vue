@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import BigNumber from 'bignumber.js'
+import { reserves } from '~/composables/d9-network/contracts/market-maker'
 
 const { state: totalIssuance, execute } = useAsyncState(async () => await api.value?.query.balances.totalIssuance().then(result => new BigNumber(result.toHex())), new BigNumber(0))
 const totalIssuanceBN = useTokenAmount(totalIssuance, 'D9')
@@ -7,10 +8,12 @@ const { n } = useI18n()
 
 const totalIssuanceFormatted = computed(() => n(totalIssuanceBN.value.toNumber(), { maximumFractionDigits: 0 }))
 
-watchEffect(() => {
-  toValue(api)
-  execute()
+watch(api, (api) => {
+  if (api)
+    execute()
 })
+
+const value = computed(() => reserves.usdt.div(reserves.d9).toNumber())
 </script>
 
 <template>
@@ -19,7 +22,7 @@ watchEffect(() => {
       Overview
     </h2>
     <p font-bold text-gradient>
-      {{ '<' }} $0.000001
+      {{ '≈' }} {{ $n(value, { currency: 'USD', notation: 'standard', style: 'currency' }) }}
     </p>
 
     <dl class="details" mt-1.875rem>

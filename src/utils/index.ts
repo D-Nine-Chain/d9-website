@@ -14,11 +14,19 @@ export function truncateAddress(address: string | GenericAccountId | undefined) 
   const match = (address.toString()).match(truncateRegex)
   if (!match)
     return address.toString()
-  return `${match[1]}…${match[2]}`
+  return `Dn${match[1]}…${match[2]}`
 }
 
 export function truncate(str: string, left = 8, end = 5) {
   if (!str)
     return ''
   return `${str.substring(0, left)}…${str.substring(str.length - end)}`
+}
+
+export function fixupAddress(address: string | undefined) {
+  if (!address)
+    return address
+  if (address.startsWith('Dn') && address.length > 47)
+    return address.substring(2)
+  return address
 }

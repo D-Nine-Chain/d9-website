@@ -1,5 +1,26 @@
 <script setup lang="ts">
+import { reserves } from '~/composables/d9-network/contracts/market-maker'
+import { useBalance as useUSDTBalance } from '~/composables/d9-network/contracts/usdt'
 
+const props = defineProps<{
+  address: string
+}>()
+
+const { address } = toRefs(props)
+
+const { state: usdtBalanceState } = useUSDTBalance(address)
+const usdtBalance = computed(() => reduceTokenAmount(usdtBalanceState, 'USDT').toNumber())
+
+const { state: account } = useD9Account(address)
+const d9Balance = computed(() => reduceTokenAmount(account.value?.data.free, 'D9').toNumber())
+
+const d9AsUSDT = computed(() => {
+  const u = reserves.usdt.div(reserves.d9).multipliedBy(d9Balance.value).toNumber()
+  if (Number.isNaN(u))
+    return 0
+  // return reserves.usdt.div(reserves.d9).multipliedBy(d9Balance.value).toNumber()
+  return u
+})
 </script>
 
 <template>
@@ -13,7 +34,7 @@
 
       <p block overflow-hidden text-ellipsis text-1.75rem font-bold>
         <span class="text-gradient">
-          TJ6yHGd7pRNUGCgijbnY7yjcqYvw996fZv
+          Dn{{ props.address }}
         </span>
       </p>
 
@@ -26,10 +47,10 @@
 
           <div>
             <p text-end text-brand font-bold>
-              43,532.233
+              {{ $n(d9Balance ?? 0) }}
             </p>
             <p mt-1 text-end font-bold>
-              ≈ 328.20
+              ≈ {{ $n(d9AsUSDT ?? 0, { currency: 'USD', notation: 'standard', style: 'currency' }) }}
             </p>
           </div>
         </div>
@@ -45,10 +66,10 @@
 
             <div>
               <p text-end text-t-usdt font-bold>
-                43,532.233
+                {{ $n(usdtBalance ?? 0) }}
               </p>
               <p mt-1 text-end font-bold>
-                ≈ 328.20
+                ≈ {{ $n(usdtBalance ?? 0, { currency: 'USD', notation: 'standard', style: 'currency' }) }}
               </p>
             </div>
           </div>

@@ -13,10 +13,7 @@ const routes: { path: keyof RouteNamedMap, name: string }[] = [{
 }, {
   path: '/tokens',
   name: 'Tokens',
-}, {
-  path: '/wallet',
-  name: 'Wallet',
-}]
+}/** {  path: '/wallet',  name: 'Wallet',} */]
 const { dark } = toRefs(props)
 
 const { y } = useWindowScroll()

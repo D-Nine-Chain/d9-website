@@ -7,16 +7,16 @@ export function _formatTokenAmount(amount: any, decimals: number) {
   if (!amount || !amount.toString)
     return new BigNumber(0)
   const _amount = amount.toString()
-  console.info(
-    'format token amount',
-    amount.toString(),
-    '_amount',
-    _amount,
-    'decimals',
-    decimals,
-    'result',
-    new BigNumber(_amount).dividedBy(divisor).toString(),
-  )
+  // console.info(
+  //   'format token amount',
+  //   amount.toString(),
+  //   '_amount',
+  //   _amount,
+  //   'decimals',
+  //   decimals,
+  //   'result',
+  //   new BigNumber(_amount).dividedBy(divisor).toString(),
+  // )
   return new BigNumber(_amount).dividedBy(divisor)
 }
 

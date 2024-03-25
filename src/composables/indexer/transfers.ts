@@ -1,4 +1,5 @@
 import { useQuery } from '@vue/apollo-composable'
+import type { OptionsParameter } from '@vue/apollo-composable/dist/useQuery.js'
 import type { MaybeRefOrGetter } from '@vueuse/core'
 import gql from 'graphql-tag'
 import type { Token } from '~/types'
@@ -31,8 +32,8 @@ export interface TransfersConnection {
 
 const QUERY = gql`
 query Transfers(
-  $fromId: String
-  $toId: String
+  $orFromId: String
+  $orToId: String
   $token: Token
   $limit: Int = 10
   $offset: Int = 0
@@ -45,11 +46,11 @@ query Transfers(
         token_eq: $token,
         AND: {
           to: {
-            id_eq: $toId
+            id_eq: $orToId
           },
           OR: {
             from: {
-              id_eq: $fromId
+              id_eq: $orFromId
             }
           }
         }
@@ -70,7 +71,22 @@ query Transfers(
       }
   }
 
-  transfersConnection(orderBy: timestamp_DESC) {
+  transfersConnection(
+    orderBy: timestamp_DESC
+    where: {
+      token_eq: $token,
+      AND: {
+        to: {
+          id_eq: $orToId
+        },
+        OR: {
+          from: {
+            id_eq: $orFromId
+          }
+        }
+      }
+    }
+  ) {
     totalCount
     pageInfo {
       hasNextPage
@@ -83,6 +99,9 @@ query Transfers(
 }
 `
 
-export function useTransfers(params: MaybeRefOrGetter<{ token?: Token, limit: number, offset: number }>) {
-  return useQuery<{ transfers: TransferRecord[], transfersConnection: TransfersConnection }>(QUERY, params)
+export function useTransfers(params: MaybeRefOrGetter<{ token?: Token, orFromId?: string, orToId?: string, limit: number, offset: number }>, options?: OptionsParameter<any, any>) {
+  return useQuery<{ transfers: TransferRecord[], transfersConnection: TransfersConnection }>(QUERY, params, {
+    pollInterval: 5000,
+    ...(options ?? {}),
+  })
 }

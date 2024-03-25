@@ -148,16 +148,15 @@ declare global {
   const useCloned: typeof import('@vueuse/core')['useCloned']
   const useColorMode: typeof import('@vueuse/core')['useColorMode']
   const useConfirmDialog: typeof import('@vueuse/core')['useConfirmDialog']
-  const useContractsCallMessage: typeof import('./composables/utils')['useContractsCallMessage']
   const useCounter: typeof import('@vueuse/core')['useCounter']
   const useCssModule: typeof import('vue')['useCssModule']
   const useCssVar: typeof import('@vueuse/core')['useCssVar']
   const useCssVars: typeof import('vue')['useCssVars']
   const useCurrentElement: typeof import('@vueuse/core')['useCurrentElement']
   const useCycleList: typeof import('@vueuse/core')['useCycleList']
+  const useD9Account: typeof import('./composables/d9-network/balance')['useD9Account']
   const useD9SessionRefs: typeof import('./composables/d9-network/session')['useD9SessionRefs']
   const useD9SessionStore: typeof import('./composables/d9-network/session')['useD9SessionStore']
-  const useD9TokenAmount: typeof import('./composables/token')['useD9TokenAmount']
   const useD9VotingRefs: typeof import('./composables/d9-network/vote')['useD9VotingRefs']
   const useD9VotingStore: typeof import('./composables/d9-network/vote')['useD9VotingStore']
   const useDark: typeof import('@vueuse/core')['useDark']
@@ -185,7 +184,6 @@ declare global {
   const useEventSource: typeof import('@vueuse/core')['useEventSource']
   const useEventsFromApi: typeof import('./composables/utils')['useEventsFromApi']
   const useExtrinsic: typeof import('./composables/utils')['useExtrinsic']
-  const useExtrinsicByEvent: typeof import('./composables/utils')['useExtrinsicByEvent']
   const useExtrinsicByEventRecord: typeof import('./composables/utils')['useExtrinsicByEventRecord']
   const useEyeDropper: typeof import('@vueuse/core')['useEyeDropper']
   const useFavicon: typeof import('@vueuse/core')['useFavicon']
@@ -194,7 +192,6 @@ declare global {
   const useFileSystemAccess: typeof import('@vueuse/core')['useFileSystemAccess']
   const useFocus: typeof import('@vueuse/core')['useFocus']
   const useFocusWithin: typeof import('@vueuse/core')['useFocusWithin']
-  const useFormatD9TokenAmount: typeof import('./composables/token')['useFormatD9TokenAmount']
   const useFormatTokenAmount: typeof import('./composables/token')['useFormatTokenAmount']
   const useFps: typeof import('@vueuse/core')['useFps']
   const useFullscreen: typeof import('@vueuse/core')['useFullscreen']
@@ -226,7 +223,6 @@ declare global {
   const useNavigatorLanguage: typeof import('@vueuse/core')['useNavigatorLanguage']
   const useNetwork: typeof import('@vueuse/core')['useNetwork']
   const useNetworkFee: typeof import('./composables/utils')['useNetworkFee']
-  const useNetworkFeeByEvent: typeof import('./composables/utils')['useNetworkFeeByEvent']
   const useNetworkFeeByEventRecord: typeof import('./composables/utils')['useNetworkFeeByEventRecord']
   const useNow: typeof import('@vueuse/core')['useNow']
   const useObjectUrl: typeof import('@vueuse/core')['useObjectUrl']
@@ -480,6 +476,7 @@ declare module 'vue' {
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
     readonly useCurrentElement: UnwrapRef<typeof import('@vueuse/core')['useCurrentElement']>
     readonly useCycleList: UnwrapRef<typeof import('@vueuse/core')['useCycleList']>
+    readonly useD9Account: UnwrapRef<typeof import('./composables/d9-network/balance')['useD9Account']>
     readonly useD9SessionRefs: UnwrapRef<typeof import('./composables/d9-network/session')['useD9SessionRefs']>
     readonly useD9SessionStore: UnwrapRef<typeof import('./composables/d9-network/session')['useD9SessionStore']>
     readonly useD9VotingRefs: UnwrapRef<typeof import('./composables/d9-network/vote')['useD9VotingRefs']>
@@ -794,6 +791,7 @@ declare module '@vue/runtime-core' {
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
     readonly useCurrentElement: UnwrapRef<typeof import('@vueuse/core')['useCurrentElement']>
     readonly useCycleList: UnwrapRef<typeof import('@vueuse/core')['useCycleList']>
+    readonly useD9Account: UnwrapRef<typeof import('./composables/d9-network/balance')['useD9Account']>
     readonly useD9SessionRefs: UnwrapRef<typeof import('./composables/d9-network/session')['useD9SessionRefs']>
     readonly useD9SessionStore: UnwrapRef<typeof import('./composables/d9-network/session')['useD9SessionStore']>
     readonly useD9VotingRefs: UnwrapRef<typeof import('./composables/d9-network/vote')['useD9VotingRefs']>

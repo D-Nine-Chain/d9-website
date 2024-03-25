@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { formatDistance } from 'date-fns'
+import { formatDistanceToNowStrict } from 'date-fns'
 import type { DataTablePageEvent } from 'primevue/datatable'
 import { truncate, truncateAddress } from '~/utils'
 
@@ -16,6 +16,7 @@ const items = computed(() => {
       from: truncateAddress(transfer.from.id),
       to: truncateAddress(transfer.to.id),
       hash: truncate(transfer.extrinsicHash, 9, 6),
+      token: transfer.token,
       block: transfer.blockNumber,
     }
   }) ?? []
@@ -46,33 +47,32 @@ function onPage(event: DataTablePageEvent) {
       :loading
       @page="onPage($event)"
     >
-      <Column field="amount" header="Amount">
-        <template #body="slotProps">
+      <Column field="hash" header="Hash" />
+      <Column field="block" header="Block" />
+      <Column field="from" header="From" />
+      <Column field="to" header="To" />
+      <Column field="amount" header="Amount" :body-style="{ textAlign: 'end' }">
+        <template #body="{ data: { amount, token } }">
           <span font-bold text-gradient>
-            {{ formatTokenAmount(slotProps.data.amount, 'D9') }}
+            {{ formatTokenAmount(amount, token) }} {{ token }}
           </span>
         </template>
       </Column>
-      <Column field="result" header="Result">
-        <template #body>
-          <img>
-        </template>
-      </Column>
-      <Column field="age" header="Age">
+      <Column field="age" header="Age" :body-style="{ textAlign: 'end' }">
         <template #body="{ data: { age } }">
           <p font-bold>
-            {{ formatDistance(
+            {{ formatDistanceToNowStrict(
               age,
-              new Date(),
               { addSuffix: true },
             ) }}
           </p>
         </template>
       </Column>
-      <Column field="from" header="From" />
-      <Column field="to" header="To" />
-      <Column field="hash" header="Hash" />
-      <Column field="block" header="Block" />
+      <Column field="result" header="Result">
+        <template #body>
+          <img w-20px src="/imgs/success-fill.webp">
+        </template>
+      </Column>
     </DataTable>
   </section>
 </template>
