@@ -47,9 +47,13 @@ export function useFormatTokenAmount(amount: MaybeRefOrGetter<any>, token: Maybe
 }
 
 export function formatTokenAmount(amount: MaybeRefOrGetter<any>, token: MaybeRefOrGetter<Token>, _display?: MaybeRefOrGetter<number>) {
-  let decimals = TokenFormatMap[toValue(token)].decimals ?? 0
   const display = _display ?? TokenFormatMap[toValue(token)].display
+  return reduceTokenAmount(toValue(amount), toValue(token)).toFixed(toValue(display))
+}
+
+export function reduceTokenAmount(amount: any, token: Token) {
+  let decimals = TokenFormatMap[toValue(token)].decimals ?? 0
   if (token === 'D9')
     decimals = registry.value?.chainDecimals?.[0] ?? 0
-  return _formatTokenAmount(toValue(amount), decimals).toFixed(toValue(display))
+  return _formatTokenAmount(toValue(amount), decimals)
 }

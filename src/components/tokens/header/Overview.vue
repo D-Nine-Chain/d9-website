@@ -50,7 +50,7 @@ watchEffect(() => {
         </dt>
       </div>
 
-      <div>
+      <div class="!hidden">
         <dd>
           Circulating Market Cap:
         </dd>

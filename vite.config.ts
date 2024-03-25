@@ -54,6 +54,7 @@ export default defineConfig({
       dirs: [
         'src/composables',
         'src/composables/d9-network',
+        'src/composables/indexer',
         'src/stores',
       ],
       vueTemplate: true,

@@ -1,5 +1,10 @@
 <script setup lang="ts">
+import { reserves } from '~/composables/d9-network/contracts/market-maker'
 
+const { result, loading } = useTrade24H()
+await until(loading).toBe(false)
+
+const trade24H = computed(() => result.value?.trade24H.at(0))
 </script>
 
 <template>
@@ -9,7 +14,7 @@
     </h2>
 
     <dl class="details">
-      <div>
+      <div class="hidden!">
         <dd>
           Holders:
         </dd>
@@ -23,7 +28,8 @@
           Total Transfer Count:
         </dd>
         <dt>
-          1.859,321
+          <!-- {{ $n(trade24H?.tradeCount24H ?? 0) }} -->
+          -
         </dt>
       </div>
 
@@ -32,8 +38,10 @@
           Transfers (24h):
         </dd>
         <dt>
-          <span>1.051</span>
-          <span>(-15.18%)</span>
+          <span>
+            {{ $n(trade24H?.tradeCount24H ?? 0) }}
+          </span>
+          <span>({{ $n((trade24H?.percentageChange24H ?? 0) / 100, { style: 'percent' }) }})</span>
         </dt>
       </div>
 
@@ -42,8 +50,13 @@
           Trading Volume (24h):
         </dd>
         <dt>
-          <span>$1.051</span>
-          <span>(-15.18%)</span>
+          <span>{{ $n(
+            trade24H ? Number(trade24H.tradingVolume24H) : 0,
+            { currency: 'USD', notation: 'standard', style: 'currency' },
+          ) }}</span>
+          <span />
+          <!-- <span>(-15.18%)</span> -->
+          <!-- <span>(-)</span> -->
         </dt>
       </div>
 
@@ -52,8 +65,9 @@
           Liquidity:
         </dd>
         <dt>
-          <span>$1.051</span>
-          <span>(-15.18%)</span>
+          <span>{{ $n(reserves.usdt.toNumber() * 2, { currency: 'USD', notation: 'standard', style: 'currency' }) }}</span>
+          <!-- <span>(-15.18%)</span> -->
+          <span />
         </dt>
       </div>
     </dl>
