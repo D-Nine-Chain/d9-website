@@ -16,8 +16,8 @@ useHead({
   link: [
     {
       rel: 'icon',
-      type: 'image/svg+xml',
-      href: () => '/favicon.svg',
+      type: 'image/webp',
+      href: () => '/d9-blue-round.webp',
     },
   ],
 })
