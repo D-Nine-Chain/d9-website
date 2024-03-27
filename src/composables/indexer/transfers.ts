@@ -101,7 +101,7 @@ query Transfers(
 
 export function useTransfers(params: MaybeRefOrGetter<{ token?: Token, orFromId?: string, orToId?: string, limit: number, offset: number }>, options?: OptionsParameter<any, any>) {
   return useQuery<{ transfers: TransferRecord[], transfersConnection: TransfersConnection }>(QUERY, params, {
-    pollInterval: 5000,
+    pollInterval: 30000,
     ...(options ?? {}),
   })
 }

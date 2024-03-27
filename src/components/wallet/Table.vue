@@ -8,12 +8,17 @@ const props = defineProps<{
 }>()
 
 const limit = 10
-const { result, loading, fetchMore } = useTransfers({
+const { result, loading, fetchMore, refetch, restart } = useTransfers(computed(() => ({
   limit,
   offset: 0,
   orFromId: props.address,
   orToId: props.address,
-})
+})))
+
+watch(() => props.address, () => {
+  restart()
+  refetch()?.catch(console.warn)
+}, { flush: 'pre' })
 
 watch(() => props.address, (address) => {
   if (address) {
