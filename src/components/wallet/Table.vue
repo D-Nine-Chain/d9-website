@@ -9,7 +9,6 @@ const props = defineProps<{
 
 const limit = 10
 const { result, loading, fetchMore } = useTransfers({
-  token: 'D9',
   limit,
   offset: 0,
   orFromId: props.address,
