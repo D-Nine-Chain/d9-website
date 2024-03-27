@@ -8,10 +8,10 @@ export function useD9Account(address: MaybeRefOrGetter<string>) {
   }, undefined, { resetOnExecute: false })
 
   watch(api, (api) => {
-    api && state.execute()
+    api && state.execute().catch(console.warn)
   })
   watch(() => address, (address) => {
-    address && state.execute()
+    address && state.execute().catch(console.warn)
   })
 
   useIntervalFn(state.execute, 5000)

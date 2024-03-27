@@ -8,10 +8,10 @@ const props = defineProps<{
 
 const { address } = toRefs(props)
 
-const { state: usdtBalanceState } = useUSDTBalance(address)
+const { state: usdtBalanceState, isLoading } = useUSDTBalance(address)
 const usdtBalance = computed(() => reduceTokenAmount(usdtBalanceState, 'USDT').toNumber())
 
-const { state: account } = useD9Account(address)
+const { state: account, isLoading: d9BalanceLoading } = useD9Account(address)
 const d9Balance = computed(() => reduceTokenAmount(account.value?.data.free, 'D9').toNumber())
 
 const d9AsUSDT = computed(() => {
@@ -20,6 +20,11 @@ const d9AsUSDT = computed(() => {
     return 0
   // return reserves.usdt.div(reserves.d9).multipliedBy(d9Balance.value).toNumber()
   return u
+})
+
+watch(address, () => {
+  usdtBalanceState.value = undefined
+  account.value = undefined
 })
 </script>
 
@@ -46,12 +51,19 @@ const d9AsUSDT = computed(() => {
           </div>
 
           <div>
-            <p text-end text-brand font-bold>
-              {{ $n(d9Balance ?? 0) }}
-            </p>
-            <p mt-1 text-end font-bold>
-              ≈ {{ $n(d9AsUSDT ?? 0, { currency: 'USD', notation: 'standard', style: 'currency' }) }}
-            </p>
+            <ProgressSpinner
+              v-if="d9BalanceLoading && undefined === account"
+              style="width: 46px; height: 46px" stroke-width="6" fill="var(--surface-ground)"
+              animation-duration=".7s" aria-label="Custom ProgressSpinner"
+            />
+            <template v-else>
+              <p text-end text-brand font-bold>
+                {{ $n(d9Balance ?? 0) }}
+              </p>
+              <p mt-1 text-end font-bold>
+                ≈ {{ $n(d9AsUSDT ?? 0, { currency: 'USD', notation: 'standard', style: 'currency' }) }}
+              </p>
+            </template>
           </div>
         </div>
 
@@ -65,12 +77,19 @@ const d9AsUSDT = computed(() => {
             </div>
 
             <div>
-              <p text-end text-t-usdt font-bold>
-                {{ $n(usdtBalance ?? 0) }}
-              </p>
-              <p mt-1 text-end font-bold>
-                ≈ {{ $n(usdtBalance ?? 0, { currency: 'USD', notation: 'standard', style: 'currency' }) }}
-              </p>
+              <ProgressSpinner
+                v-if="isLoading && undefined === usdtBalance"
+                style="width: 46px; height: 46px" stroke-width="6" fill="var(--surface-ground)"
+                animation-duration=".7s" aria-label="Custom ProgressSpinner"
+              />
+              <template v-else>
+                <p text-end text-t-usdt font-bold>
+                  {{ $n(usdtBalance ?? 0) }}
+                </p>
+                <p mt-1 text-end font-bold>
+                  ≈ {{ $n(usdtBalance ?? 0, { currency: 'USD', notation: 'standard', style: 'currency' }) }}
+                </p>
+              </template>
             </div>
           </div>
         </div>

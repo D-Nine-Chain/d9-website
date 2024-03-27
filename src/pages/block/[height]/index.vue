@@ -3,7 +3,7 @@ const route = useRoute('/block/[height]/')
 
 const height = computed(() => route.params.height)
 
-const { state: block, error } = await useBlock(height)
+const { state: block, error, isLoading } = useBlock(height)
 
 watch(error, (err) => {
   // err && toast.add({ severity: 'error', summary: 'Error', detail: err?.toString(), life: 3500 })
@@ -13,7 +13,9 @@ watch(error, (err) => {
 
 <template>
   <div pb-16>
-    <template v-if="block">
+    <Loading v-if="isLoading" my-20 />
+
+    <template v-else-if="block">
       <BlockchainBlockHeader :block />
 
       <div w-limited mt-36>

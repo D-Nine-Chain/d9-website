@@ -7,7 +7,7 @@ import { getGasLimits } from '~/utils/contracts'
 
 export async function getBalance(address: string) {
   if (!api.value)
-    return null
+    return undefined
   console.info('get usdt balance', address)
   const contract = new ContractPromise(api.value!, Contracts.D9_USDT.abi, Contracts.D9_USDT.address)
   const { result, output } = await contract.query['psp22::balanceOf'](address, {
@@ -16,7 +16,7 @@ export async function getBalance(address: string) {
   if (result.isOk) {
     const ok = (output?.toJSON() as any)?.ok
     if (!ok)
-      return null
+      return undefined
     const balance = ok as u128
     return new BigNumber(balance.toString())
   }
@@ -24,16 +24,16 @@ export async function getBalance(address: string) {
 }
 
 export function useBalance(address: MaybeRefOrGetter<string>) {
-  const state = useAsyncState<BigNumber | null>(async () => await getBalance(toValue(address)), null, {
+  const state = useAsyncState<BigNumber | undefined>(async () => await getBalance(toValue(address)), undefined, {
     resetOnExecute: false,
   })
 
   watch(api, (api) => {
-    api && state.execute()
+    api && state.execute().catch(console.warn)
   })
 
   watch(() => address, (address) => {
-    address && state.execute()
+    address && state.execute().catch(console.warn)
   })
 
   useIntervalFn(state.execute, 5000)
