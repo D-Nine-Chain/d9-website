@@ -1,4 +1,6 @@
+<!-- eslint-disable no-cond-assign -->
 <script setup lang="ts">
+import type { DecodedMessage } from '@polkadot/api-contract/types'
 import type { u128 } from '@polkadot/types/bundle'
 import type { EventRecord } from '@polkadot/types/interfaces'
 import type { Token, WrappedBlock } from '~/types'
@@ -14,21 +16,22 @@ const extrinsic = useExtrinsicByEventRecord(props.block, props.record.hash)
 
 const info: ComputedRef<{ from: string, to: string, amount: bigint, token: Token } | undefined> = computed(() => {
   const event = props.record.event
+  let decoded: DecodedMessage | undefined
   if (api.value?.events.balances.Transfer.is(event)) {
     const [from, to, amount] = event.data
     return { from: from.toString(), to: to.toString(), amount: amount.toBigInt(), token: 'D9' }
   }
-  else {
-    const decoded = decodeUSDTContractMessage(extrinsic.value)
-    if (decoded) {
-      const [to, value] = decoded.args as [Uint8Array, u128]
-      return {
-        from: extrinsic.value!.signer.toString(),
-        to: to.toString(),
-        amount: value.toBigInt(),
-        token: 'USDT',
-      }
+  else if (decoded = decodeUSDTContractMessage(extrinsic.value)) {
+    const [to, value] = decoded.args as [Uint8Array, u128]
+    return {
+      from: extrinsic.value!.signer.toString(),
+      to: to.toString(),
+      amount: value.toBigInt(),
+      token: 'USDT',
     }
+  }
+  else {
+    console.info('nth', event.section, event.method)
   }
   return undefined
 })

@@ -37,9 +37,9 @@ const items = computed(() => {
       amount: transfer.amount,
       result: true,
       age: transfer.timestamp,
-      from: truncateAddress(transfer.from.id),
-      to: truncateAddress(transfer.to.id),
-      hash: truncate(transfer.extrinsicHash, 9, 6),
+      from: transfer.from.id,
+      to: transfer.to.id,
+      hash: transfer.extrinsicHash,
       block: transfer.blockNumber,
       token: transfer.token,
       trxType: 'Transfer',
@@ -57,8 +57,6 @@ function onPage(event: DataTablePageEvent) {
     },
   })
 }
-
-await until(loading).toBe(false)
 </script>
 
 <template>
@@ -73,10 +71,40 @@ await until(loading).toBe(false)
       :loading
       @page="onPage($event)"
     >
-      <Column field="block" header="Block" />
-      <Column field="trxType" header="Transaction Type" />
-      <Column field="from" header="From" />
-      <Column field="to" header="To" />
+      <Column field="hash" header="hash">
+        <template #body="{ data: { hash, block } }">
+          <RouterLink underline underline-1 underline-gray underline-dashed :to="{ name: '/block/[height]/extrinsic/[extrinsicHash]/', params: { height: block, extrinsicHash: hash } }">
+            {{ truncate(hash, 9, 6) }}
+          </RouterLink>
+        </template>
+      </Column>
+
+      <Column field="block" header="Block">
+        <template #body="{ data: { block } }">
+          <RouterLink underline underline-1 underline-gray underline-dashed :to="{ name: '/block/[height]/', params: { height: block } }">
+            {{ block }}
+          </RouterLink>
+        </template>
+      </Column>
+
+      <!-- <Column field="trxType" header="Transaction Type" /> -->
+
+      <Column field="from" header="From">
+        <template #body="{ data: { from } }">
+          <RouterLink underline underline-1 underline-gray underline-dashed :to="{ name: '/wallet/[address]', params: { address: from } }">
+            {{ truncateAddress(from) }}
+          </RouterLink>
+        </template>
+      </Column>
+
+      <Column field="to" header="to">
+        <template #body="{ data: { to } }">
+          <RouterLink underline underline-1 underline-gray underline-dashed :to="{ name: '/wallet/[address]', params: { address: to } }">
+            {{ truncateAddress(to) }}
+          </RouterLink>
+        </template>
+      </Column>
+
       <Column field="amount" header="Amount" :body-style="{ textAlign: 'end' }">
         <template #body="{ data: { amount, token } }">
           <span font-bold text-gradient>

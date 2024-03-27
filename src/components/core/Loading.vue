@@ -18,7 +18,7 @@ watch(ele, (ele) => {
 </script>
 
 <template>
-  <Card min-w-70>
+  <Card mx-auto max-w-90 min-w-70>
     <template #content>
       <div col items-center justify-center>
         <ProgressSpinner

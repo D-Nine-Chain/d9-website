@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// extrinsic hash
+// event hash
 const route = useRoute('/block/[height]/event-record/[hash]/')
 
 const hash = computed(() => route.params.hash)

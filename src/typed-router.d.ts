@@ -22,6 +22,7 @@ declare module 'vue-router/auto-routes' {
     '/[...all]': RouteRecordInfo<'/[...all]', '/:all(.*)', { all: ParamValue<true> }, { all: ParamValue<false> }>,
     '/block/[height]/': RouteRecordInfo<'/block/[height]/', '/block/:height', { height: ParamValue<true> }, { height: ParamValue<false> }>,
     '/block/[height]/event-record/[hash]/': RouteRecordInfo<'/block/[height]/event-record/[hash]/', '/block/:height/event-record/:hash', { height: ParamValue<true>, hash: ParamValue<true> }, { height: ParamValue<false>, hash: ParamValue<false> }>,
+    '/block/[height]/extrinsic/[extrinsicHash]/': RouteRecordInfo<'/block/[height]/extrinsic/[extrinsicHash]/', '/block/:height/extrinsic/:extrinsicHash', { height: ParamValue<true>, extrinsicHash: ParamValue<true> }, { height: ParamValue<false>, extrinsicHash: ParamValue<false> }>,
     '/block/[height]/trx/[hash]': RouteRecordInfo<'/block/[height]/trx/[hash]', '/block/:height/trx/:hash', { height: ParamValue<true>, hash: ParamValue<true> }, { height: ParamValue<false>, hash: ParamValue<false> }>,
     '/blockchain': RouteRecordInfo<'/blockchain', '/blockchain', Record<never, never>, Record<never, never>>,
     '/tokens': RouteRecordInfo<'/tokens', '/tokens', Record<never, never>, Record<never, never>>,

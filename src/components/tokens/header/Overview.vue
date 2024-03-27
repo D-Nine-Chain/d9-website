@@ -6,7 +6,11 @@ const { state: totalIssuance, execute } = useAsyncState(async () => await api.va
 const totalIssuanceBN = useTokenAmount(totalIssuance, 'D9')
 const { n } = useI18n()
 
-const totalIssuanceFormatted = computed(() => n(totalIssuanceBN.value.toNumber(), { maximumFractionDigits: 0 }))
+const totalIssuanceFormatted = computed(() => {
+  const diff = totalIssuanceBN.value.plus(new BigNumber(-10_000_000_000))
+  const res = totalIssuanceBN.value.plus(diff.negated())
+  return n(res.toNumber(), { maximumFractionDigits: 2, minimumFractionDigits: 2 })
+})
 
 watch(api, (api) => {
   if (api)

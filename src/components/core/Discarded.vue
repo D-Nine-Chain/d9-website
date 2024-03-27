@@ -9,7 +9,7 @@
     </span>
 
     <p mt-8>
-      Data Has Been Discarded
+      Block Data Has Been Discarded
     </p>
 
     <Button mt-8 size="small" @click="$router.back()">
