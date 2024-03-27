@@ -4,7 +4,7 @@ import type { RouteNamedMap } from 'vue-router/auto-routes'
 const props = defineProps<{
   dark?: boolean
 }>()
-const routes: { path: keyof RouteNamedMap, name: string }[] = [{
+const routes: { path: keyof RouteNamedMap | { href: string }, name: string }[] = [{
   path: '/',
   name: 'Home',
 }, {
@@ -13,6 +13,9 @@ const routes: { path: keyof RouteNamedMap, name: string }[] = [{
 }, {
   path: '/tokens',
   name: 'Tokens',
+}, {
+  path: { href: 'https://cross-chain.d9network.com/' },
+  name: 'Cross Chain',
 }/** {  path: '/wallet',  name: 'Wallet',} */]
 const { dark } = toRefs(props)
 
@@ -40,8 +43,13 @@ const { y } = useWindowScroll()
       <ul h-full row items-center lt-md:hidden>
         <!-- eslint-disable-next-line vue/no-template-shadow -->
         <li v-for="route, index in routes" :key="index">
-          <router-link active-class="active" :to="{ path: route.path }">
-            {{ route.name }}
+          <template v-if="('string' !== typeof route.path)">
+            <a :href="route.path.href" target="_blank">{{ route.name }}</a>
+          </template>
+          <router-link v-else custom :to="{ path: route.path }">
+            <template #default="{ isActive, href, navigate }">
+              <a :class="{ active: isActive }" :href @click="navigate">{{ route.name }}</a>
+            </template>
           </router-link>
         </li>
       </ul>
@@ -56,9 +64,11 @@ const { y } = useWindowScroll()
 <style lang="scss" scoped>
 ul {
   li {
-    transition: all 0.4s ease-out;
-    @apply px-2 lg:px-6 xl:px-8 h-full hover:cursor-pointer hover:text-gray-200 text-gray-400 col align-central;
-
+    @apply h-full;
+    a {
+      transition: all 0.4s ease-out;
+      @apply px-2 lg:px-6 xl:px-8 h-full hover:cursor-pointer hover:text-gray-200 text-gray-400 col align-central;
+    }
     .active {
       @apply text-gray-100 font-bold;
     }
@@ -68,7 +78,9 @@ ul {
 .dark-mode {
   ul {
     li {
-      @apply text-gray-500;
+      a {
+        @apply text-gray-500;
+      }
       .active {
         @apply text-gray-800 font-bold;
       }
