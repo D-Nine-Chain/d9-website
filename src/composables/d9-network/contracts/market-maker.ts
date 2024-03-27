@@ -9,6 +9,15 @@ export const reserves = reactive<{ d9: BigNumber, usdt: BigNumber }>({
   usdt: new BigNumber(0),
 })
 
+export const d9ToUSDT = computed(() => {
+  const value = reserves.usdt.div(reserves.d9).toNumber()
+  return Number.isNaN(value) ? 0 : value
+})
+export const USDTToD9 = computed(() => {
+  const value = reserves.d9.div(reserves.usdt).toNumber()
+  return Number.isNaN(value) ? 0 : value
+})
+
 /**
  * @throws {import('@polkadot/types/interfaces').DispatchError}
  */

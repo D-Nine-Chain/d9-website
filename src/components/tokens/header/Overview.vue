@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import BigNumber from 'bignumber.js'
-import { reserves } from '~/composables/d9-network/contracts/market-maker'
+import { d9ToUSDT } from '~/composables/d9-network/contracts/market-maker'
 
 const { state: totalIssuance, execute } = useAsyncState(async () => await api.value?.query.balances.totalIssuance().then(result => new BigNumber(result.toHex())), new BigNumber(0))
 const totalIssuanceBN = useTokenAmount(totalIssuance, 'D9')
@@ -12,8 +12,6 @@ watch(api, (api) => {
   if (api)
     execute()
 })
-
-const value = computed(() => reserves.usdt.div(reserves.d9).toNumber())
 </script>
 
 <template>
@@ -22,7 +20,7 @@ const value = computed(() => reserves.usdt.div(reserves.d9).toNumber())
       Overview
     </h2>
     <p font-bold text-gradient>
-      {{ '≈' }} {{ $n(value, { currency: 'USD', notation: 'standard', style: 'currency' }) }}
+      {{ '≈' }} {{ $n(d9ToUSDT, { currency: 'USD', notation: 'standard', style: 'currency' }) }}
     </p>
 
     <dl class="details" mt-1.875rem>

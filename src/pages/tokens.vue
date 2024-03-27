@@ -4,7 +4,9 @@
 <template>
   <div pb-16>
     <div w-limited mt-14>
-      <TokensHeader />
+      <Suspense>
+        <TokensHeader />
+      </Suspense>
 
       <TokensTable mt-12 />
     </div>

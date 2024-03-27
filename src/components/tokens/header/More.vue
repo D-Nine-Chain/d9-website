@@ -4,11 +4,8 @@ import { reserves } from '~/composables/d9-network/contracts/market-maker'
 const { result: transfers } = useTransfers({ token: 'D9', limit: 1, offset: 0 })
 
 const { result, loading } = useTrade24H()
-await until(loading).toBe(false)
 
 const trade24H = computed(() => result.value?.trade24H.at(0))
-
-await until(loading).toBe(false)
 </script>
 
 <template>
@@ -32,8 +29,10 @@ await until(loading).toBe(false)
           Total Transfer Count:
         </dd>
         <dt>
-          <!-- {{ $n(trade24H?.tradeCount24H ?? 0) }} -->
-          {{ $n(transfers?.transfersConnection.totalCount ?? 0) }}
+          <Skeleton v-if="loading" class="w-4rem!" />
+          <template v-else>
+            {{ $n(transfers?.transfersConnection.totalCount ?? 0) }}
+          </template>
         </dt>
       </div>
 
@@ -42,10 +41,13 @@ await until(loading).toBe(false)
           Transfers (24h):
         </dd>
         <dt>
-          <span>
-            {{ $n(trade24H?.tradeCount24H ?? 0) }}
-          </span>
-          <span>({{ $n((trade24H?.percentageChange24H ?? 0) / 100, { style: 'percent' }) }})</span>
+          <Skeleton v-if="loading" class="w-4rem!" />
+          <template v-else>
+            <span>
+              {{ $n(trade24H?.tradeCount24H ?? 0) }}
+            </span>
+            <span>({{ $n((trade24H?.percentageChange24H ?? 0) / 100, { style: 'percent' }) }})</span>
+          </template>
         </dt>
       </div>
 
@@ -54,11 +56,14 @@ await until(loading).toBe(false)
           Trading Volume (24h):
         </dd>
         <dt>
-          <span>{{ $n(
-            trade24H ? Number(trade24H.tradingVolume24H) : 0,
-            { currency: 'USD', notation: 'standard', style: 'currency' },
-          ) }}</span>
-          <span />
+          <Skeleton v-if="loading" class="w-4rem!" />
+          <template v-else>
+            <span>{{ $n(
+              trade24H ? Number(trade24H.tradingVolume24H) : 0,
+              { currency: 'USD', notation: 'standard', style: 'currency' },
+            ) }}</span>
+            <span />
+          </template>
           <!-- <span>(-15.18%)</span> -->
           <!-- <span>(-)</span> -->
         </dt>
