@@ -44,15 +44,17 @@ query Transfers(
       orderBy: timestamp_DESC
       where: {
         token_eq: $token,
+        from: {
+          id_not_eq: "vMEwWJwYbzgiKeLeu4RwiAd73GVvGijTywfEAbba3pzPiPC"
+        },
+        to: {
+          id_not_eq: "vMEwWJwYbzgiKeLeu4RwiAd73GVvGijTywfEAbba3pzPiPC"
+        },
         AND: {
-          to: {
-            id_eq: $orToId
-          },
           OR: {
-            from: {
-              id_eq: $orFromId
-            }
-          }
+          	to: { id_eq: $orToId },
+          },
+          from: { id_eq: $orFromId }
         }
       }
   ) {
