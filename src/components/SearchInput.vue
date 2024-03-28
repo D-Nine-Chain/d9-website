@@ -4,6 +4,18 @@ const query = ref('')
 function submit() {
   if (!query.value)
     return
+
+  // check if block number
+  try {
+    const blockNumber = Number.parseInt(query.value)
+    if (!Number.isNaN(blockNumber) && Number.isSafeInteger(blockNumber) && Number.isFinite(blockNumber)) {
+      router.push({ name: '/block/[height]/', params: { height: blockNumber } })
+      return
+    }
+  }
+  catch {}
+
+  // check if extrinsic hash
   if (query.value.startsWith('0x')) {
     // Search transfer extrinsic hash
     router.push({ name: '/indexer/search/transfer/[extrinsicHash]', params: { extrinsicHash: query.value } })

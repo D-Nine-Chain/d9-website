@@ -14,7 +14,7 @@ await until(record).not.toBeUndefined()
 <template>
   <div pb-16>
     <template v-if="block && record">
-      <BlockchainBlockEventRecordHeader :record :block />
+      <BlockchainBlockEventRecordHeader :extrinsic-hash="hash" :record :block />
 
       <div w-limited mt-76>
         <BlockchainBlockEventRecordOverview :record :block />

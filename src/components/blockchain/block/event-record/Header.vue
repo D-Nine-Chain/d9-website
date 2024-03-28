@@ -5,6 +5,7 @@ import { format, formatDistance } from 'date-fns'
 const props = defineProps<{
   block: Block
   record: EventRecord
+  extrinsicHash: string
 }>()
 
 const { record } = toRefs(props)
@@ -27,7 +28,16 @@ const formatFee = useFormatTokenAmount(computed(() => fee.value?.actualFee), 'D9
       <dl class="details">
         <div>
           <dt>
-            Hash:
+            Extrinsic Hash:
+          </dt>
+          <dd>
+            {{ props.extrinsicHash }}
+          </dd>
+        </div>
+
+        <div>
+          <dt>
+            Event Hash:
           </dt>
           <dd>
             {{ record.hash }}

@@ -12,7 +12,7 @@ not-found: Not found
 empty: Empty
 page:
   search:
-    hint: Search by Account / Hash
+    hint: Search by Account /  Extrinsic Hash / Block Number
     header: 'Search: {extrinsicHash}'
   blockchain:
     header-blocks:

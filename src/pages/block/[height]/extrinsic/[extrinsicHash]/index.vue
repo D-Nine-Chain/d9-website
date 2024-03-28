@@ -37,7 +37,7 @@ const record = useEventRecord(block, eventHash)
   <div pb-16>
     <Loading v-if="isLoading || eventHashLoading" class="my-20vh" />
     <template v-else-if="block && record">
-      <BlockchainBlockEventRecordHeader :record :block />
+      <BlockchainBlockEventRecordHeader :extrinsic-hash :record :block />
 
       <div w-limited mt-76>
         <BlockchainBlockEventRecordOverview :record :block />
