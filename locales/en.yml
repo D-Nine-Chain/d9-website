@@ -12,7 +12,8 @@ not-found: Not found
 empty: Empty
 page:
   search:
-    hint: Search by Token / Account / Contract / Hash / Block
+    hint: Search by Account / Hash
+    header: 'Search: {extrinsicHash}'
   blockchain:
     header-blocks:
       title: Block

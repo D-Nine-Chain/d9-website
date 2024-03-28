@@ -5,7 +5,7 @@ import { truncate, truncateAddress } from '~/utils'
 
 const limit = 10
 
-const { result, loading, fetchMore } = useTransfers({ token: 'D9', limit, offset: 0 })
+const { result, loading, refetch } = useTransfers({ token: 'D9', limit, offset: 0 })
 
 const items = computed(() => {
   return result.value?.transfers.map((transfer) => {
@@ -24,13 +24,8 @@ const items = computed(() => {
 
 const total = computed(() => result.value?.transfersConnection.totalCount ?? 0)
 function onPage(event: DataTablePageEvent) {
-  fetchMore({
-    variables: {
-      offset: limit * event.page,
-    },
-    updateQuery: (prev, { fetchMoreResult }) => {
-      return fetchMoreResult || prev
-    },
+  refetch({
+    offset: limit * event.page,
   })
 }
 </script>
@@ -47,6 +42,12 @@ function onPage(event: DataTablePageEvent) {
       :loading
       @page="onPage($event)"
     >
+      <template #empty>
+        <DataTableEmpty />
+      </template>
+      <template #loading>
+        <Loading />
+      </template>
       <Column field="hash" header="hash">
         <template #body="{ data: { hash, block } }">
           <RouterLink underline underline-1 underline-gray underline-dashed :to="{ name: '/block/[height]/extrinsic/[extrinsicHash]/', params: { height: block, extrinsicHash: hash } }">

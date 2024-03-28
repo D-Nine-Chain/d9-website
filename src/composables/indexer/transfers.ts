@@ -30,6 +30,48 @@ export interface TransfersConnection {
   }
 }
 
+const CONNECTION = `
+transfersConnection(
+  orderBy: timestamp_DESC
+  where: {
+    token_eq: $token,
+    AND: {
+      to: {
+        id_eq: $orToId
+      },
+      OR: {
+        from: {
+          id_eq: $orFromId
+        }
+      }
+    }
+  }
+) {
+  totalCount
+  pageInfo {
+    hasNextPage
+    hasPreviousPage
+    startCursor
+    endCursor
+  }
+}
+`
+const QUERY_FIELDS = `
+id
+blockNumber
+timestamp
+extrinsicHash
+fee
+token
+amount
+to {
+    id
+}
+from {
+    id
+}
+`
+
 const QUERY = gql`
 query Transfers(
   $orFromId: String
@@ -44,12 +86,6 @@ query Transfers(
       orderBy: timestamp_DESC
       where: {
         token_eq: $token,
-        from: {
-          id_not_eq: "vMEwWJwYbzgiKeLeu4RwiAd73GVvGijTywfEAbba3pzPiPC"
-        },
-        to: {
-          id_not_eq: "vMEwWJwYbzgiKeLeu4RwiAd73GVvGijTywfEAbba3pzPiPC"
-        },
         AND: {
           OR: {
             to: { id_eq: $orToId },
@@ -58,35 +94,32 @@ query Transfers(
         }
       }
   ) {
-      id
-      blockNumber
-      timestamp
-      extrinsicHash
-      fee
-      token
-      amount
-      to {
-          id
-      }
-      from {
-          id
-      }
+      ${QUERY_FIELDS}
   }
+  ${CONNECTION}
+}
+`
 
+const QUERY_BY_EXTRINSIC = gql`
+query Transfers(
+  $extrinsicHash: String
+  $limit: Int = 10
+  $offset: Int = 0
+) {
+  transfers(
+      limit: $limit
+      offset: $offset
+      orderBy: timestamp_DESC
+      where: {
+        extrinsicHash_eq: $extrinsicHash
+      }
+  ) {
+      ${QUERY_FIELDS}
+  }
   transfersConnection(
     orderBy: timestamp_DESC
     where: {
-      token_eq: $token,
-      AND: {
-        to: {
-          id_eq: $orToId
-        },
-        OR: {
-          from: {
-            id_eq: $orFromId
-          }
-        }
-      }
+      extrinsicHash_eq: $extrinsicHash
     }
   ) {
     totalCount
@@ -97,13 +130,21 @@ query Transfers(
       endCursor
     }
   }
-
 }
 `
 
 export function useTransfers(params: MaybeRefOrGetter<{ token?: Token, orFromId?: string, orToId?: string, limit: number, offset: number }>, options?: OptionsParameter<any, any>) {
   return useQuery<{ transfers: TransferRecord[], transfersConnection: TransfersConnection }>(QUERY, params, {
     pollInterval: 30000,
+    keepPreviousResult: false,
+    ...(options ?? {}),
+  })
+}
+
+export function useTransfersByExtrinsicHash(params: MaybeRefOrGetter<{ extrinsicHash: string, limit: number, offset: number }>, options?: OptionsParameter<any, any>) {
+  return useQuery<{ transfers: TransferRecord[], transfersConnection: TransfersConnection }>(QUERY_BY_EXTRINSIC, params, {
+    pollInterval: 30000,
+    keepPreviousResult: false,
     ...(options ?? {}),
   })
 }

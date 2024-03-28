@@ -7,30 +7,22 @@ const props = defineProps<{
   address: string
 }>()
 
+const { address } = toRefs(props)
+
 const limit = 10
-const { result, loading, fetchMore, refetch, restart } = useTransfers(computed(() => ({
+const { result, loading, refetch } = useTransfers(computed(() => ({
   limit,
   offset: 0,
   orFromId: props.address,
   orToId: props.address,
 })))
 
-watch(() => props.address, () => {
-  restart()
-  refetch()?.catch(console.warn)
-}, { flush: 'pre' })
-
-watch(() => props.address, (address) => {
+watch(address, (address) => {
   if (address) {
-    fetchMore({
-      variables: {
-        offset: 0,
-        orFromId: props.address,
-        orToId: props.address,
-      },
-      updateQuery: (prev, { fetchMoreResult }) => {
-        return fetchMoreResult || prev
-      },
+    refetch({
+      offset: 0,
+      orFromId: address,
+      orToId: address,
     })
   }
 })
@@ -52,13 +44,8 @@ const items = computed(() => {
 })
 const total = computed(() => result.value?.transfersConnection.totalCount ?? 0)
 function onPage(event: DataTablePageEvent) {
-  fetchMore({
-    variables: {
-      offset: limit * event.page,
-    },
-    updateQuery: (prev, { fetchMoreResult }) => {
-      return fetchMoreResult || prev
-    },
+  refetch({
+    offset: limit * event.page,
   })
 }
 </script>
@@ -75,6 +62,12 @@ function onPage(event: DataTablePageEvent) {
       :loading
       @page="onPage($event)"
     >
+      <template #empty>
+        <DataTableEmpty />
+      </template>
+      <template #loading>
+        <Loading />
+      </template>
       <Column field="hash" header="hash">
         <template #body="{ data: { hash, block } }">
           <RouterLink underline underline-1 underline-gray underline-dashed :to="{ name: '/block/[height]/extrinsic/[extrinsicHash]/', params: { height: block, extrinsicHash: hash } }">
@@ -118,7 +111,7 @@ function onPage(event: DataTablePageEvent) {
       </Column>
       <Column field="age" header="Age" :body-style="{ textAlign: 'end' }">
         <template #body="{ data: { age } }">
-          <p font-bold>
+          <p>
             {{ formatDistanceToNowStrict(
               age,
               { addSuffix: true },
