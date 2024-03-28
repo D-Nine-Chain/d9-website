@@ -52,7 +52,7 @@ query Transfers(
         },
         AND: {
           OR: {
-          	to: { id_eq: $orToId },
+            to: { id_eq: $orToId },
           },
           from: { id_eq: $orFromId }
         }

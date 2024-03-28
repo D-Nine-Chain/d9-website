@@ -9,6 +9,7 @@ export default antfu(
       'no-console': 'off',
       'no-debugger': 'warn',
       'eslint-comments/no-unlimited-disable': 'off',
+      'style/no-tabs': 'off',
     },
   },
 )
