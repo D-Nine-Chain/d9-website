@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import OverlayPanel from 'primevue/overlaypanel'
 import type { RouteNamedMap } from 'vue-router/auto-routes'
 
 const props = defineProps<{
@@ -18,6 +19,7 @@ const routes: { path: keyof RouteNamedMap | { href: string }, name: string }[] =
   name: 'Cross Chain',
 }/** {  path: '/wallet',  name: 'Wallet',} */]
 const { dark } = toRefs(props)
+const op = ref()
 
 const { y } = useWindowScroll()
 </script>
@@ -54,6 +56,32 @@ const { y } = useWindowScroll()
         </li>
       </ul>
 
+      <div col cursor-pointer justify-center p-2 md:hidden @click="op?.toggle">
+        <i i-carbon-menu />
+      </div>
+
+      <OverlayPanel ref="op" :pt="{ content: 'p-0' }">
+        <div>
+          <ul class="mobile">
+            <!-- eslint-disable-next-line vue/no-template-shadow -->
+            <li v-for="route, index in routes" :key="index" m-4 min-w-140px>
+              <template v-if="('string' !== typeof route.path)">
+                <a :href="route.path.href" target="_blank">{{ route.name }}</a>
+              </template>
+              <router-link v-else custom :to="{ path: route.path }">
+                <template #default="{ isActive, href, navigate }">
+                  <a
+                    :class="{
+                      'font-bold': isActive,
+                    }" :href @click="navigate"
+                  >{{ route.name }}</a>
+                </template>
+              </router-link>
+            </li>
+          </ul>
+        </div>
+      </OverlayPanel>
+
       <button class="primary" ml-8 hidden shrink-0 px-5 py-1.5 lg:px-7>
         Log in
       </button>
@@ -62,7 +90,7 @@ const { y } = useWindowScroll()
 </template>
 
 <style lang="scss" scoped>
-ul {
+ul:not(.mobile) {
   li {
     @apply h-full;
     a {
@@ -76,7 +104,7 @@ ul {
 }
 
 .dark-mode {
-  ul {
+  ul:not(.mobile) {
     li {
       a {
         @apply text-gray-500;
