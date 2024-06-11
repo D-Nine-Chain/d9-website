@@ -1,5 +1,12 @@
 <script setup lang="ts">
+import lyRequest from '../../services/index'
 
+async function clickDownload() {
+  const response = await lyRequest.get({
+    url: '/files/latest',
+  })
+  window.open(response.file_url)
+}
 </script>
 
 <template>
@@ -17,7 +24,7 @@
           {{ $t('page.home.header.open-app') }}
         </button>
 
-        <button ml-8 grow class="primary with-border" text="Download">
+        <button ml-8 grow class="primary with-border" text="Download" @click="clickDownload()">
           {{ $t('page.home.header.download') }}
         </button>
       </div>
