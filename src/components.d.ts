@@ -33,7 +33,6 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     SearchInput: typeof import('./components/SearchInput.vue')['default']
     Skeleton: typeof import('primevue/skeleton')['default']
-    Tag: typeof import('primevue/tag')['default']
     TokensHeader: typeof import('./components/tokens/Header.vue')['default']
     TokensHeaderBasicInfo: typeof import('./components/tokens/header/BasicInfo.vue')['default']
     TokensHeaderMore: typeof import('./components/tokens/header/More.vue')['default']
