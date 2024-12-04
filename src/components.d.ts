@@ -14,7 +14,6 @@ declare module 'vue' {
     BlockchainHeader: typeof import('./components/blockchain/Header.vue')['default']
     BlockchainTable: typeof import('./components/blockchain/Table.vue')['default']
     BlockchainVotes: typeof import('./components/blockchain/Votes.vue')['default']
-    Button: typeof import('primevue/button')['default']
     Card: typeof import('primevue/card')['default']
     Column: typeof import('primevue/column')['default']
     CoverWrapper: typeof import('./components/CoverWrapper.vue')['default']
