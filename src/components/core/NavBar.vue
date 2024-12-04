@@ -17,7 +17,11 @@ const routes: { path: keyof RouteNamedMap | { href: string }, name: string }[] =
 }, {
   path: { href: 'https://cross-chain.d9network.com/' },
   name: 'Cross Chain',
-}/** {  path: '/wallet',  name: 'Wallet',} */]
+}, /** {  path: '/wallet',  name: 'Wallet',} */
+{
+  path: '/privacy-policy',
+  name: 'Privacy Policy',
+}]
 const { dark } = toRefs(props)
 const op = ref()
 

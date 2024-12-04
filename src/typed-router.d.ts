@@ -26,6 +26,7 @@ declare module 'vue-router/auto-routes' {
     '/block/[height]/trx/[hash]': RouteRecordInfo<'/block/[height]/trx/[hash]', '/block/:height/trx/:hash', { height: ParamValue<true>, hash: ParamValue<true> }, { height: ParamValue<false>, hash: ParamValue<false> }>,
     '/blockchain': RouteRecordInfo<'/blockchain', '/blockchain', Record<never, never>, Record<never, never>>,
     '/indexer/search/transfer/[extrinsicHash]': RouteRecordInfo<'/indexer/search/transfer/[extrinsicHash]', '/indexer/search/transfer/:extrinsicHash', { extrinsicHash: ParamValue<true> }, { extrinsicHash: ParamValue<false> }>,
+    '/privacy-policy': RouteRecordInfo<'/privacy-policy', '/privacy-policy', Record<never, never>, Record<never, never>>,
     '/tokens': RouteRecordInfo<'/tokens', '/tokens', Record<never, never>, Record<never, never>>,
     '/wallet/[address]': RouteRecordInfo<'/wallet/[address]', '/wallet/:address', { address: ParamValue<true> }, { address: ParamValue<false> }>,
   }
