@@ -388,7 +388,7 @@
     <p>Additionally, in order to exercise any of Your rights under the CCPA/CPRA, and if You are a California resident, You can contact Us:</p>
     <ul>
       <li>
-        <p>By email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4636292a2f253f06227f2823323129342d6825292b">[email&#160;protected]</a></p>
+        By email: <a href="mailto:policy@d9network.com">policy@d9network.com</a>
       </li>
       <li>
         <p>By visiting this page on our website: <a href="https://d9network.com/privacy-policy" rel="external nofollow noopener" target="_blank">https://d9network.com/privacy-policy</a></p>
